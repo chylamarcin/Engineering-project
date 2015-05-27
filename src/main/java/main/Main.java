@@ -46,6 +46,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         //launch(args);
+        //bitbuckettest
         BasicNetwork network = new BasicNetwork();
         network.addLayer(new BasicLayer(null,true,2));
         network.addLayer(new BasicLayer(new ActivationSigmoid(),true,3));
