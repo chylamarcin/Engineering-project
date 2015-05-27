@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/others/Parser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -692,7 +691,7 @@
       <option name="number" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-      <workItem from="1432735594603" duration="2554000" />
+      <workItem from="1432735594603" duration="2560000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1432735842541</created>
@@ -724,11 +723,17 @@
       <option name="project" value="LOCAL" />
       <updated>1432738115787</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Start from scratch!">
+      <created>1432738153748</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1432738153748</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3856000" />
+    <option name="totallyTimeSpent" value="3862000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-3" width="1368" height="772" extended-state="6" />
