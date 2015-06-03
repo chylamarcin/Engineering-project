@@ -15,11 +15,21 @@ public class CompanyExchange {
     @Column
     private Date date;
     @Column
-    private double value;
+    private long idCompany;
+    @Column
+    private String value;
 
     @ManyToOne
     @JoinColumn(name = "companyId")
     private Company company;
+
+    public long getIdCompany() {
+        return idCompany;
+    }
+
+    public void setIdCompany(long idCompany) {
+        this.idCompany = idCompany;
+    }
 
     public long getId() {
         return id;
@@ -37,11 +47,11 @@ public class CompanyExchange {
         this.date = date;
     }
 
-    public double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -52,4 +62,5 @@ public class CompanyExchange {
     public void setCompany(Company company) {
         this.company = company;
     }
+
 }

@@ -95,32 +95,9 @@ public class Main extends Application {
         BufferedReader br;
         String line;
 
-        try {
-            url = new URL("http://www.bankier.pl/gielda/notowania/akcje");
-            is = url.openStream();  // throws an IOException
-            br = new BufferedReader(new InputStreamReader(is));
-            StringBuilder buf = new StringBuilder();
 
-            while ((line = br.readLine()) != null) {
-                //System.out.println(line);
-                buf.append(line+"\n");
-            }
 
-            test = buf.toString();
-            //System.out.println(test);
-        } catch (MalformedURLException mue) {
-            mue.printStackTrace();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } finally {
-            try {
-                if (is != null) is.close();
-            } catch (IOException ioe) {
-                // nothing to see here
-            }
-        }
-
-        Parser.getTitle(test);
+        Parser.getTitle();
         //////////////////////////
         //System.out.println("test 2");
 

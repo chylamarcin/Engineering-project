@@ -20,6 +20,10 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<CompanyExchange> listOfExchanges;
 
+    public Company() {
+
+    }
+
     public long getId() {
         return id;
     }
@@ -42,5 +46,9 @@ public class Company {
 
     public void setListOfExchanges(List<CompanyExchange> listOfExchanges) {
         this.listOfExchanges = listOfExchanges;
+    }
+
+    public void addExchange(CompanyExchange companyExchange){
+        listOfExchanges.add(companyExchange);
     }
 }
