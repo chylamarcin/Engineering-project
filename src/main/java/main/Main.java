@@ -1,16 +1,24 @@
 package main;
 
+import daoImpl.DbCompany;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.NeuralNetwork;
+import org.encog.ConsoleStatusReportable;
 import org.encog.Encog;
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.MLDataSet;
+import org.encog.ml.data.basic.BasicMLData;
 import org.encog.ml.data.basic.BasicMLDataSet;
+import org.encog.ml.data.versatile.NormalizationHelper;
+import org.encog.ml.factory.MLMethodFactory;
+import org.encog.ml.model.EncogModel;
+import org.encog.neural.error.OutputErrorFunction;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
@@ -28,100 +36,87 @@ public class Main extends Application {
     /**
      * The input necessary for XOR.
      */
-    public static double XOR_INPUT[][] = { { 0.0, 0.0 }, { 1.0, 0.0 },
-            { 0.0, 1.0 }, { 1.0, 1.0 } };
+    public static double XOR_INPUT[][] = {{14.25 / 14.50, 14.30 / 14.50, 14.30 / 14.50, 14.50 / 14.50},
+            {16.90 / 16.95, 16.95 / 16.95, 16.65 / 16.95, 16.70 / 16.95},
+            {20.62 / 20.90, 20.90 / 20.90, 20.88 / 20.90, 20.73 / 20.90},
+            {4.95 / 5.10, 5.00 / 5.10, 5.10 / 5.10, 5.00 / 5.10}};
+
+//    public static double XOR_INPUT[][] = { {14.25, 14.30, 14.30, 14.50},
+//            {16.90, 16.95, 16.65, 16.70},
+//            {20.62, 20.90, 20.88, 20.73},
+//            {4.95, 5.00, 5.10, 5.00 } };
 
     /**
      * The ideal data necessary for XOR.
      */
-    public static double XOR_IDEAL[][] = { { 0.0 }, { 1.0 }, { 1.0 }, { 0.0 } };
+    public static double XOR_IDEAL[][] = {{13.60 / 14.50}, {16.83 / 16.95}, {20.40 / 20.90}, {5.05 / 5.10}};
+//    public static double XOR_IDEAL[][] = { { 13.60 }, { 16.83 }, { 20.40 }, { 5.05 } };
 
     /**
      * Main method
+     *
      * @param primaryStage
      * @throws Exception
      */
 
-
-
-
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Backward Propagation");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
-        //launch(args);
-        String test = "";
-        //bitbuckettest
         BasicNetwork network = new BasicNetwork();
-        network.addLayer(new BasicLayer(null,true,2));
-        network.addLayer(new BasicLayer(new ActivationSigmoid(),true,3));
-        network.addLayer(new BasicLayer(new ActivationSigmoid(),false,1));
+        network.addLayer(new BasicLayer(null, true, 4));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 7000));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
+
         network.getStructure().finalizeStructure();
         network.reset();
 
         // create training data
         MLDataSet trainingSet = new BasicMLDataSet(XOR_INPUT, XOR_IDEAL);
+        //double[] d = {14.60 / 14.50, 12.83 / 16.95, 20.40 / 20.90, 10.05 / 5.10};
+        //BasicMLData mlData = new BasicMLData(d);
+
 
         // train the neural network
         final ResilientPropagation train = new ResilientPropagation(network, trainingSet);
 
         int epoch = 1;
+        double epochError = 0.00003;
+        OutputErrorFunction outputErrorFunction = new OutputErrorFunction();
+
 
         do {
             train.iteration();
-            //System.out.println("Epoch #" + epoch + " Error:" + train.getError());
+            System.out.println("Epoch #" + epoch + " Error: " + train.getError());
             epoch++;
-        } while(train.getError() > 0.01);
-        train.finishTraining();
+            if (epoch > 15000) {
+                break;
+            }
+
+
+        } while (train.getError() > epochError);
 
         // test the neural network
-        //System.out.println("Neural Network Results:");
-        for(MLDataPair pair: trainingSet ) {
+        System.out.println("Neural Network Results:");
+        int z = 0;
+        double[] helpArray = {14.50, 16.95, 20.90, 5.10};
+
+        double[] error = new double[4];
+
+
+        for (MLDataPair pair : trainingSet) {
             final MLData output = network.compute(pair.getInput());
-            //System.out.println(pair.getInput().getData(0) + "," + pair.getInput().getData(1)
-            //        + ", actual=" + output.getData(0) + ",ideal=" + pair.getIdeal().getData(0));
+            //final MLData output = network.compute(mlData);
+            System.out.printf("Yesterday " + String.format(String.format("%.03f", pair.getInput().getData(3) * helpArray[z]) +
+                    " predicted = " + String.format("%.03f", output.getData(0) * helpArray[z]) +
+                    " correct = " + String.format("%.03f", pair.getIdeal().getData(0) * helpArray[z]) + " difference = " + String.format("%.03f", (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z])) + "\n"));
+            z++;
         }
-
-
-        ///////////////////////////
-        URL url;
-        InputStream is = null;
-        BufferedReader br;
-        String line;
-
-
-
-        Parser.getTitle();
-        //////////////////////////
-        //System.out.println("test 2");
-
-//        try {
-//            URL url = new URL("http://stackoverflow.com/questions/1381617");
-//            URLConnection con = url.openConnection();
-//            Pattern p = Pattern.compile("text/html;\\s+charset=([^\\s]+)\\s*");
-//            Matcher m = p.matcher(con.getContentType());
-///* If Content-Type doesn't match this pre-conception, choose default and
-// * hope for the best. */
-//            String charset = m.matches() ? m.group(1) : "ISO-8859-1";
-//            Reader r = new InputStreamReader(con.getInputStream(), charset);
-//            StringBuilder buf = new StringBuilder();
-//            while (true) {
-//                int ch = r.read();
-//                if (ch < 0)
-//                    break;
-//                buf.append((char) ch);
-//            }
-//            String str = buf.toString();
-//            System.out.println(str);
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
 
         Encog.getInstance().shutdown();
     }

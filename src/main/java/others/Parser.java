@@ -1,5 +1,7 @@
 package others;
 
+import dao.DbDao;
+import daoImpl.DbCompany;
 import model.Company;
 import model.CompanyExchange;
 import org.jsoup.Jsoup;
@@ -20,7 +22,9 @@ import java.util.Map;
 /**
  * Created by odin on 27.05.15.
  */
-public class Parser {
+public class Parser implements DbDao {
+
+    DbCompany dbCompany = new DbCompany();
 
 
     public static void getTitle() {
@@ -84,4 +88,8 @@ public class Parser {
             companyExchange.setValue(listOfCompanyValues.get(i));
         }
     }
+
+
+
+
 }
