@@ -1,9 +1,9 @@
 package daoImpl;
 
 import dao.DbDao;
-import javafx.scene.control.Alert;
+//import javafx.scene.control.Alert;
 import model.Company;
-import others.MyAlerts;
+//import others.MyAlerts;
 
 import javax.persistence.TypedQuery;
 
@@ -21,7 +21,7 @@ public class DbCompany implements DbDao {
             entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            MyAlerts.showAlert("Error!", "Can't save company!", Alert.AlertType.ERROR, "Error!");
+            //MyAlerts.showAlert("Error!", "Can't save company!", Alert.AlertType.ERROR, "Error!");
             entityManager.getTransaction().rollback();
             e.printStackTrace();
             return false;

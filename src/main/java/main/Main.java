@@ -15,6 +15,10 @@ import org.encog.neural.error.OutputErrorFunction;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
+import org.encog.persist.EncogDirectoryPersistence;
+
+import javax.swing.*;
+import java.io.File;
 
 public class Main extends Application {
 
@@ -22,9 +26,9 @@ public class Main extends Application {
      * The input necessary for XOR.
      */
     public static double INPUT[][] = {{14.25 / 14.50, 14.30 / 14.50, 14.30 / 14.50, 14.50 / 14.50},
-                                          {16.90 / 16.95, 16.95 / 16.95, 16.65 / 16.95, 16.70 / 16.95},
-                                          {20.62 / 20.90, 20.90 / 20.90, 20.88 / 20.90, 20.73 / 20.90},
-                                           {4.95 / 5.10, 5.00 / 5.10, 5.10 / 5.10, 5.00 / 5.10}};
+            {16.90 / 16.95, 16.95 / 16.95, 16.65 / 16.95, 16.70 / 16.95},
+            {20.62 / 20.90, 20.90 / 20.90, 20.88 / 20.90, 20.73 / 20.90},
+            {4.95 / 5.10, 5.00 / 5.10, 5.10 / 5.10, 5.00 / 5.10}};
 
     /**
      * The ideal data necessary for XOR.
@@ -46,19 +50,75 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        BasicNetwork network = new BasicNetwork();
-        network.addLayer(new BasicLayer(null, true, 4));
-        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 8));
-        network.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
 
-        network.getStructure().finalizeStructure();
-        network.reset();
+        BasicNetwork network2 = new BasicNetwork();
+        network2.addLayer(new BasicLayer(null, true, 4));
+        network2.addLayer(new BasicLayer(new ActivationSigmoid(), true, 8));
+        network2.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
 
-        // create training data
+        network2.getStructure().finalizeStructure();
+        network2.reset();
+
         MLDataSet trainingSet = new BasicMLDataSet(INPUT, IDEAL);
 
-        // train the neural network
-        final ResilientPropagation train = new ResilientPropagation(network, trainingSet);
+
+        // test the neural network
+        System.out.println("Neural Network Results:");
+
+        double[] helpArray = {14.50, 16.95, 20.90, 5.10};
+        double[] error = new double[4];
+        int z = 0;
+        for (MLDataPair pair : trainingSet) {
+            final MLData output = network2.compute(pair.getInput());
+            //final MLData output = network.compute(mlData);
+            System.out.printf("Yesterday " + String.format(String.format("%.03f", pair.getInput().getData(3) * helpArray[z]) +
+                    " predicted = " + String.format("%.03f", output.getData(0) * helpArray[z]) +
+                    " correct = " + String.format("%.03f", pair.getIdeal().getData(0) * helpArray[z]) + " difference = " + String.format("%.03f", (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z])) + "\n"));
+            z++;
+        }
+
+
+//        int response = JOptionPane.showConfirmDialog(null, "Do you want to save network?", "Confirm",
+//                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//        if (response == JOptionPane.NO_OPTION) {
+//            System.out.println("No button clicked");
+//        } else if (response == JOptionPane.YES_OPTION) {
+//            EncogDirectoryPersistence.saveObject(new File("network.eg"), network);
+//        } else if (response == JOptionPane.CLOSED_OPTION) {
+//            System.out.println("JOptionPane closed");
+//        }
+//        Encog.getInstance().shutdown();
+
+        // for (int i = 0; i < 10000000; i++) {
+        //  System.out.println(i);
+
+        for (int i = 0; i < 10000000; i++) {
+
+
+
+            for (int j = 0; j < 10; j++) {
+                trainNewNetwork(network2, trainingSet);
+                loadAndEvaluate(trainingSet, helpArray, error, network2);
+            }
+
+            network2 = new BasicNetwork();
+            network2.addLayer(new BasicLayer(null, true, 4));
+            network2.addLayer(new BasicLayer(new ActivationSigmoid(), true, 8));
+            network2.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
+
+            network2.getStructure().finalizeStructure();
+            network2.reset();
+
+
+            System.out.println(i);
+        }
+
+        // }
+    }
+
+    public static void trainNewNetwork(BasicNetwork network2, MLDataSet trainingSet) {
+
+        final ResilientPropagation train = new ResilientPropagation(network2, trainingSet);
 
         int epoch = 1;
         double epochError = 0.00006;
@@ -66,28 +126,66 @@ public class Main extends Application {
 
         do {
             train.iteration();
-            System.out.println("Epoch #" + epoch + " Error: " + train.getError());
+            //System.out.println("Epoch #" + epoch + " Error: " + train.getError());
             epoch++;
-            if (epoch > 15000) {
+            if (epoch > 15000000) {
                 break;
             }
         } while (train.getError() > epochError);
 
-        // test the neural network
-        System.out.println("Neural Network Results:");
-        int z = 0;
         double[] helpArray = {14.50, 16.95, 20.90, 5.10};
-
         double[] error = new double[4];
-
+        int z = 0;
         for (MLDataPair pair : trainingSet) {
-            final MLData output = network.compute(pair.getInput());
+            final MLData output = network2.compute(pair.getInput());
             //final MLData output = network.compute(mlData);
             System.out.printf("Yesterday " + String.format(String.format("%.03f", pair.getInput().getData(3) * helpArray[z]) +
                     " predicted = " + String.format("%.03f", output.getData(0) * helpArray[z]) +
                     " correct = " + String.format("%.03f", pair.getIdeal().getData(0) * helpArray[z]) + " difference = " + String.format("%.03f", (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z])) + "\n"));
             z++;
         }
-        Encog.getInstance().shutdown();
+
     }
+
+    public static void loadAndEvaluate(MLDataSet trainingSet, double[] helpArray, double[] error, BasicNetwork network2) {
+        int z = 0;
+        int j = 0;
+        System.out.println("Loading network");
+        BasicNetwork network = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File("network.eg"));
+
+        double e = network.calculateError(trainingSet);
+        System.out.println();
+        double[] error2 = new double[4];
+        for (MLDataPair pair : trainingSet) {
+            final MLData output = network.compute(pair.getInput());
+            //final MLData output = network.compute(mlData);
+            System.out.printf("Yesterday " + String.format(String.format("%.03f", pair.getInput().getData(3) * helpArray[z]) +
+                    " predicted = " + String.format("%.03f", output.getData(0) * helpArray[z]) +
+                    " correct = " + String.format("%.03f", pair.getIdeal().getData(0) * helpArray[z]) + " difference = " + String.format("%.03f", (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z])) + "\n"));
+            error2[z] = (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z]);
+            z++;
+
+
+            for (int i = 0; i < error.length; i++) {
+
+                if (error2[i] > error[i] && error[i] >= 0) {
+                    j++;
+                }
+            }
+
+        }
+
+        System.out.println(j);
+        if (j >= 3) {
+            EncogDirectoryPersistence.saveObject(new File("network.eg"), network2);
+            System.out.println("WOAH OMG LOL!!!!!!!!!!!!!!!!!!");
+            System.out.println("New network saved");
+            JOptionPane.showMessageDialog(null, "Spam");
+        } else {
+            System.out.println("No better network here!");
+        }
+
+
+    }
+
 }
