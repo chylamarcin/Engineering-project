@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javassist.compiler.SyntaxError;
-import org.encog.Encog;
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataPair;
@@ -17,6 +15,7 @@ import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.encog.persist.EncogDirectoryPersistence;
+import others.Parser;
 
 import javax.swing.*;
 import java.io.File;
@@ -26,7 +25,7 @@ public class Main extends Application {
     /**
      * The input necessary for XOR.
      */
-    public static double INPUT[][] = {{14.25 / 14.50, 14.30 / 14.50, 14.30 / 14.50, 14.50 / 14.50},
+    public static double input[][] = {{14.25 / 14.50, 14.30 / 14.50, 14.30 / 14.50, 14.50 / 14.50},
             {16.90 / 16.95, 16.95 / 16.95, 16.65 / 16.95, 16.70 / 16.95},
             {20.62 / 20.90, 20.90 / 20.90, 20.88 / 20.90, 20.73 / 20.90},
             {4.95 / 5.10, 5.00 / 5.10, 5.10 / 5.10, 5.00 / 5.10}};
@@ -34,7 +33,7 @@ public class Main extends Application {
     /**
      * The ideal data necessary for XOR.
      */
-    public static double IDEAL[][] = {{13.60 / 14.50}, {16.83 / 16.95}, {20.40 / 20.90}, {5.05 / 5.10}};
+    public static double ideal[][] = {{13.60 / 14.50}, {16.83 / 16.95}, {20.40 / 20.90}, {5.05 / 5.10}};
 
     /**
      * Main method
@@ -52,6 +51,11 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
+       Parser.getTitle();
+
+    }
+
+    public void createAndTrainNetwork(double[][] input, double[][] ideal){
         BasicNetwork network2 = new BasicNetwork();
         network2.addLayer(new BasicLayer(null, true, 4));
         network2.addLayer(new BasicLayer(new ActivationSigmoid(), true, 8));
@@ -60,7 +64,7 @@ public class Main extends Application {
         network2.getStructure().finalizeStructure();
         network2.reset();
 
-        MLDataSet trainingSet = new BasicMLDataSet(INPUT, IDEAL);
+        MLDataSet trainingSet = new BasicMLDataSet(input, ideal);
 
         // test the neural network
         System.out.println("Neural Network Results:");
@@ -68,6 +72,7 @@ public class Main extends Application {
         double[] helpArray = {14.50, 16.95, 20.90, 5.10};
         double[] error = new double[4];
         int z = 0;
+
 //        for (MLDataPair pair : trainingSet) {
 //            final MLData output = network2.compute(pair.getInput());
 //            //final MLData output = network.compute(mlData);
@@ -88,7 +93,7 @@ public class Main extends Application {
 //        }
 //        Encog.getInstance().shutdown();
 
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 10; i++) {
 
             network2 = new BasicNetwork();
             network2.addLayer(new BasicLayer(null, true, 4));
@@ -103,6 +108,8 @@ public class Main extends Application {
             System.out.println("Jeszcze tylko " + (10000000 - i + 1));
         }
     }
+
+
 
     public static double[] trainNewNetwork(BasicNetwork newNetwork, MLDataSet trainingSet) {
 

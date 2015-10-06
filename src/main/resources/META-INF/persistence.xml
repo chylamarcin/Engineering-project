@@ -1,0 +1,24 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="myDatabase" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <!--<property name="javax.persistence.jdbc.user" value="neuralnetwork"/>
+            <property name="javax.persistence.jdbc.password" value="atosek123"/>
+             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql.cba.pl/toast_cba_pl"/>-->
+            <property name="javax.persistence.jdbc.user" value="marcin"/>
+            <property name="javax.persistence.jdbc.password" value="marcin"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+            <property name="hibernate.connection.useUnicode" value="true" />
+            <property name="hibernate.connection.characterEncoding"
+                      value="UTF-8" />
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -24,6 +24,11 @@ public class Company {
 
     }
 
+    public Company(String companyName, CompanyExchange companyExchange){
+        this.companyName = companyName;
+        this.listOfExchanges.add(companyExchange);
+    }
+
     public long getId() {
         return id;
     }

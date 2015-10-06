@@ -15,19 +15,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by odin on 27.05.15.
  */
 public class Parser implements DbDao {
 
-    DbCompany dbCompany = new DbCompany();
-
 
     public static void getTitle() {
+
+        DbCompany dbCompany = new DbCompany();
         //Download page source
         URL url;
         InputStream is = null;
@@ -42,8 +41,7 @@ public class Parser implements DbDao {
             StringBuilder buf = new StringBuilder();
 
             while ((line = br.readLine()) != null) {
-                //System.out.println(line);
-                buf.append(line+"\n");
+                buf.append(line + "\n");
             }
             html = buf.toString();
 
@@ -61,35 +59,54 @@ public class Parser implements DbDao {
 
         Document doc = Jsoup.parse(html);
 
-        //Element content = doc.getElementById()
-//        HashMap<String, String> tableMap = new HashMap<String, String>();
         LinkedList<String> listOfCompanyNames = new LinkedList<String>();
-        Elements tabElements = doc.getElementsByClass("colWalor");
-        for (Element tabElem : tabElements) {
-            String companyName = tabElem.text();
-            listOfCompanyNames.add(companyName);
-        }
-
         LinkedList<String> listOfCompanyValues = new LinkedList<String>();
+        Elements tabElements = doc.getElementsByClass("colWalor");
         Elements tabElementsCurse = doc.getElementsByClass("colKurs");
-        for (Element tabCurseElem : tabElementsCurse) {
-            String companyValue = tabCurseElem.text();
+
+        for (int i = 1; i < tabElements.size(); i++) {
+            String companyName = tabElements.get(i).text();
+            String companyValue = tabElementsCurse.get(i).text();
+            listOfCompanyNames.add(companyName);
             listOfCompanyValues.add(companyValue);
         }
 
-        listOfCompanyNames.removeFirst();
-        listOfCompanyValues.removeFirst();
+        Date date = new Date();
+        ArrayList<Company> companies = new ArrayList<Company>();
 
         for (int i = 0; i < listOfCompanyNames.size(); i++) {
             Company company = new Company();
             company.setCompanyName(listOfCompanyNames.get(i));
-            CompanyExchange companyExchange = new CompanyExchange();
-            companyExchange.setIdCompany(company.getId());
-            companyExchange.setValue(listOfCompanyValues.get(i));
+            companies.add(company);
         }
+
+        for (int i = 0; i < listOfCompanyNames.size(); i++) {
+            Boolean companyName = false;
+            companyName = dbCompany.booleanFindCompany(listOfCompanyNames.get(i));
+            if (companyName == false) {
+                dbCompany.saveCompany(companies.get(i));
+            }
+        }
+
+        for (int i = 0; i < listOfCompanyNames.size(); i++) {
+            Company company = dbCompany.findCompany(listOfCompanyNames.get(i));
+
+            CompanyExchange companyExchange = new CompanyExchange();
+            companyExchange.setValue(listOfCompanyValues.get(i));
+            companyExchange.setCompany(company);
+            companyExchange.setDate(date);
+            company.addExchange(companyExchange);
+
+            if (company.getCompanyName() == dbCompany.findCompany(listOfCompanyNames.get(i)).getCompanyName()) {
+                dbCompany.updateCompany(company);
+                dbCompany.saveCompanyExchange(companyExchange);
+            } else {
+                dbCompany.saveCompany(company);
+                dbCompany.saveCompanyExchange(companyExchange);
+            }
+
+        }
+
     }
-
-
-
 
 }

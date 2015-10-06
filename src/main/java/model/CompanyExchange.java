@@ -14,22 +14,13 @@ public class CompanyExchange {
     private long id;
     @Column
     private Date date;
-    @Column
-    private long idCompany;
+
     @Column
     private String value;
 
     @ManyToOne
     @JoinColumn(name = "companyId")
     private Company company;
-
-    public long getIdCompany() {
-        return idCompany;
-    }
-
-    public void setIdCompany(long idCompany) {
-        this.idCompany = idCompany;
-    }
 
     public long getId() {
         return id;

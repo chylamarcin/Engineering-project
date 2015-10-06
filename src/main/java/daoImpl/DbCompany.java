@@ -3,6 +3,7 @@ package daoImpl;
 import dao.DbDao;
 //import javafx.scene.control.Alert;
 import model.Company;
+import model.CompanyExchange;
 //import others.MyAlerts;
 
 import javax.persistence.TypedQuery;
@@ -13,11 +14,48 @@ import javax.persistence.TypedQuery;
 public class DbCompany implements DbDao {
 
     public boolean saveCompany(Company company) {
-        try {//
+        try {
             if (!entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().begin();
             }
+
             entityManager.persist(company);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            //MyAlerts.showAlert("Error!", "Can't save company!", Alert.AlertType.ERROR, "Error!");
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public boolean saveCompanyExchange(CompanyExchange companyExchange) {
+        try {
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
+            }
+
+            entityManager.persist(companyExchange);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            //MyAlerts.showAlert("Error!", "Can't save company!", Alert.AlertType.ERROR, "Error!");
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public boolean updateCompany(Company company) {
+        try {
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
+            }
+
+            entityManager.merge(company);
             entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -44,6 +82,24 @@ public class DbCompany implements DbDao {
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
             return null;
+        }
+    }
+
+    public Boolean booleanFindCompany(String companyName) {
+        Company user = null;
+        try {
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
+            }
+            TypedQuery<Company> typedQuery = entityManager.createQuery(
+                    "select u from Company u where u.companyName = :companyName", Company.class);
+            typedQuery.setParameter("companyName", companyName);
+            user = typedQuery.getSingleResult();
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            return false;
         }
     }
 
