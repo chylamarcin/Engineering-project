@@ -4,9 +4,12 @@ import dao.DbDao;
 //import javafx.scene.control.Alert;
 import model.Company;
 import model.CompanyExchange;
+import others.Parser;
 //import others.MyAlerts;
 
 import javax.persistence.TypedQuery;
+import javax.swing.*;
+import java.util.List;
 
 /**
  * Created by odin on 15.04.15.
@@ -103,6 +106,31 @@ public class DbCompany implements DbDao {
         }
     }
 
+    public Boolean checkCompaniesCount() {
+        List<Company> user = null;
+        try {
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
+            }
+            TypedQuery<Company> typedQuery = entityManager.createQuery(
+                    "select u from Company u", Company.class);
+            //typedQuery.setParameter("companyName", companyName);
+            user = typedQuery.getResultList();
+            entityManager.getTransaction().commit();
+            int companyCount = Parser.getCountOfSiteCompany();
+            if(user.size() == companyCount){
+                JOptionPane.showMessageDialog(null, "Need to update companies.");
+                return true;
+            }else{
+
+                return false;
+            }
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            return false;
+        }
+    }
+
     public Company findCompanyById(long id) {
         Company company = null;
         try {
@@ -119,6 +147,21 @@ public class DbCompany implements DbDao {
             entityManager.getTransaction().rollback();
             return null;
         }
+    }
+
+    public List<Company> loadAllCompanies() {
+        TypedQuery<Company> createQuery = entityManager.createQuery(
+                "select t from Company t", Company.class);
+        List<Company> resultCompanyList = createQuery.getResultList();
+        return resultCompanyList;
+    }
+
+    public List<Company> loadAllCompaniesOnLetter(String letter) {
+        TypedQuery<Company> createQuery = entityManager.createQuery(
+                "select t from Company t where t.companyName like :x", Company.class);
+        createQuery.setParameter("x", letter.toUpperCase()+"%");
+        List<Company> resultCompanyList = createQuery.getResultList();
+        return resultCompanyList;
     }
 
 }
