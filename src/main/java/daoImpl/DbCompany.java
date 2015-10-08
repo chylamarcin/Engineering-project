@@ -7,8 +7,10 @@ import model.CompanyExchange;
 import others.Parser;
 //import others.MyAlerts;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.swing.*;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -107,25 +109,29 @@ public class DbCompany implements DbDao {
     }
 
     public Boolean checkCompaniesCount() {
-        List<Company> user = null;
+
         try {
             if (!entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().begin();
             }
-            TypedQuery<Company> typedQuery = entityManager.createQuery(
-                    "select u from Company u", Company.class);
-            //typedQuery.setParameter("companyName", companyName);
-            user = typedQuery.getResultList();
-            entityManager.getTransaction().commit();
-            int companyCount = Parser.getCountOfSiteCompany();
-            if(user.size() == companyCount){
-                JOptionPane.showMessageDialog(null, "Need to update companies.");
-                return true;
-            }else{
 
+
+            Query query = entityManager.createNativeQuery("Select count(companyName) from company");
+            int companyCountAtDatabase = Integer.valueOf(query.getSingleResult().toString());
+            int companyCountAtSite = Parser.getCountOfSiteCompany();
+
+            if (companyCountAtDatabase == companyCountAtSite) {
+                System.out.println(companyCountAtDatabase + " " + companyCountAtSite);
+                System.out.println("true");
+                return true;
+            } else {
+                System.out.println(companyCountAtDatabase + " " + companyCountAtSite);
+                System.out.println("false");
                 return false;
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("spam");
             entityManager.getTransaction().rollback();
             return false;
         }
@@ -159,7 +165,7 @@ public class DbCompany implements DbDao {
     public List<Company> loadAllCompaniesOnLetter(String letter) {
         TypedQuery<Company> createQuery = entityManager.createQuery(
                 "select t from Company t where t.companyName like :x", Company.class);
-        createQuery.setParameter("x", letter.toUpperCase()+"%");
+        createQuery.setParameter("x", letter.toUpperCase() + "%");
         List<Company> resultCompanyList = createQuery.getResultList();
         return resultCompanyList;
     }
