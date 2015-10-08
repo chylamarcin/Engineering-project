@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_36.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_0_2_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_1_2_2_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-      <change type="DELETED" beforePath="D:\Users\Marcin\Documents\GitHub\engi\.idea\libraries\Maven__org_jboss_jandex_1_1_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Marcin\Documents\GitHub\engi\.idea\libraries\Maven__org_jboss_jdeparser_jdeparser_1_0_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Marcin\Documents\GitHub\engi\.idea\libraries\Maven__org_jboss_logging_jboss_logging_annotations_1_2_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Marcin\Documents\GitHub\engi\.idea\libraries\Maven__org_jboss_logging_jboss_logging_processor_1_2_0_Final.xml" afterPath="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added auto-checking and auto update of companies.&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/others/ViewChanger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/controllers/Controller.class" afterPath="$PROJECT_DIR$/target/classes/controllers/Controller.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/main/Main.class" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/Company.java" afterPath="$PROJECT_DIR$/src/main/java/model/Company.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/CompanyExchange.java" afterPath="$PROJECT_DIR$/src/main/java/model/CompanyExchange.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controllers/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/Controller.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/daoImpl/DbCompany.java" afterPath="$PROJECT_DIR$/src/main/java/daoImpl/DbCompany.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/daoImpl/DbSingleton.java" afterPath="$PROJECT_DIR$/src/main/java/daoImpl/DbSingleton.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/others/Parser.java" afterPath="$PROJECT_DIR$/src/main/java/others/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engi.iml" afterPath="$PROJECT_DIR$/engi.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/sample.fxml" afterPath="$PROJECT_DIR$/src/main/resources/sample.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/sample.fxml" afterPath="$PROJECT_DIR$/target/classes/sample.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\Users\Marcin\Documents\GitHub\engi\.idea\libraries\Maven__org_hibernate_common_hibernate_commons_annotations_4_0_5_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_0_Final.xml" />
-      <change type="MOVED" beforePath="D:\Users\Marcin\Documents\GitHub\engi\.idea\libraries\Maven__org_hibernate_hibernate_core_5_0_0_CR1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_0_2_Final.xml" />
-      <change type="MOVED" beforePath="D:\Users\Marcin\Documents\GitHub\engi\.idea\libraries\Maven__org_jboss_logging_jboss_logging_3_3_0_Beta1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,10 +79,32 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.655527">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state vertical-scroll-proportion="-1.8120301">
+              <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2284#2425#0" expanded="true" />
+                <element signature="e#2424#2425#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.931034">
+              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1568#2091#0" expanded="true" />
+                <element signature="e#2090#2091#0" expanded="true" />
+                <element signature="e#2129#2410#0" expanded="true" />
+                <element signature="e#2409#2410#0" expanded="true" />
+                <element signature="e#2449#2690#0" expanded="true" />
+                <element signature="e#2689#2690#0" expanded="true" />
+                <element signature="e#2732#2932#0" expanded="true" />
+                <element signature="e#2931#2932#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,10 +114,13 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/model/Company.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+              <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1151#1152#0" expanded="true" />
+                <element signature="e#403#404#0" expanded="true" />
+                <element signature="e#469#470#0" expanded="true" />
+                <element signature="e#1215#1216#0" expanded="true" />
+                <element signature="e#1267#1268#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -112,41 +130,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/model/CompanyExchange.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="persistence.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="108" selection-start-line="11" selection-start-column="108" selection-end-line="11" selection-end-column="108" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/others/Parser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1650#1658#0" expanded="true" />
-                <element signature="e#1725#1733#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -156,18 +140,22 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/dao/DbDao.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbSingleton.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/daoImpl/DbSingleton.java">
+      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/others/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
-              <folding />
+            <state vertical-scroll-proportion="1.0344827">
+              <caret line="66" column="23" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1985#1993#0" expanded="true" />
+                <element signature="e#2976#2984#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -175,10 +163,10 @@
       <file leaf-file-name="DbCompany.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/daoImpl/DbCompany.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+            <state vertical-scroll-proportion="-13.034483">
+              <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1444325168774" expanded="true" signature="3952:3990" placeholder="Select count..company..." />
               </folding>
             </state>
           </provider>
@@ -223,13 +211,15 @@
         <option value="$PROJECT_DIR$/src/main/java/daoImpl/DBTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/Test.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/daoImpl/DbSingleton.java" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/main/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/model/Company.java" />
-        <option value="$PROJECT_DIR$/src/main/java/daoImpl/DbCompany.java" />
+        <option value="$PROJECT_DIR$/src/main/java/others/ViewChanger.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/CompanyExchange.java" />
+        <option value="$PROJECT_DIR$/src/main/java/daoImpl/DbSingleton.java" />
+        <option value="$PROJECT_DIR$/src/main/java/daoImpl/DbCompany.java" />
+        <option value="$PROJECT_DIR$/src/main/java/model/Company.java" />
         <option value="$PROJECT_DIR$/src/main/java/others/Parser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controllers/Controller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/main/Main.java" />
       </list>
     </option>
   </component>
@@ -264,10 +254,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="754" />
+    <option name="width" value="1366" />
+    <option name="height" value="738" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -313,9 +301,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -533,9 +519,15 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -552,27 +544,28 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="135" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="142" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="157" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="163" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="162" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="169" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="840" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="846" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="158" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="165" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="150" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="156" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="154" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="161" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="832" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="838" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Dropbox/Programming/NetBeansProjects/KNEDgui" />
+    <property name="last_opened_file_path" value="D:/Program Files (x86)/Oracle/JavaFX Scene Builder 2.0/JavaFX Scene Builder 2.0.exe" />
     <property name="FullScreen" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -634,15 +627,6 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -763,13 +747,13 @@
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
+        <value defaultName="singleModule" />
       </option>
       <envs />
       <patterns />
@@ -781,14 +765,6 @@
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
       <method />
     </configuration>
     <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -808,15 +784,15 @@
       <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" />
       <option name="OUTPUT_DIRECTORY" />
       <option name="ANNOTATION_TYPE" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
+        <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
@@ -902,7 +878,9 @@
       <workItem from="1444120192277" duration="978000" />
       <workItem from="1444121182282" duration="1095000" />
       <workItem from="1444122281982" duration="5847000" />
-      <workItem from="1444128172235" duration="6465000" />
+      <workItem from="1444128172235" duration="6700000" />
+      <workItem from="1444217240779" duration="3191000" />
+      <workItem from="1444282746099" duration="31078000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1432735842541</created>
@@ -994,36 +972,60 @@
       <option name="project" value="LOCAL" />
       <updated>1438371446340</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Finalize parser, added database, persistence file and collection of companies and their exchanges.">
+      <created>1444134739301</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1444134739301</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Figured out how to check internet connection. &#10;Still need to test it. Tested only without internet.">
+      <created>1444252155133</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1444252155133</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Added checking status (need to update or no) of companies in database.">
+      <created>1444322164316</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1444322164316</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Added checking status (need to update or no) of companies in database.">
+      <created>1444324643228</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1444324643228</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79594000" />
+    <option name="totallyTimeSpent" value="114098000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="0" y="0" width="1366" height="738" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32868218" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32750398" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32868218" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928678" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4728682" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3534884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47217807" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32114467" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2203514" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22296296" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37674418" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37519872" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1057,18 +1059,27 @@
     <MESSAGE value="Progress more!" />
     <MESSAGE value="Progress more!&#10;Network file added." />
     <MESSAGE value="31 July." />
-    <option name="LAST_COMMIT_MESSAGE" value="31 July." />
+    <MESSAGE value="Finalize parser, added database, persistence file and collection of companies and their exchanges." />
+    <MESSAGE value="Figured out how to check internet connection. &#10;Still need to test it. Tested only without internet." />
+    <MESSAGE value="Added checking status (need to update or no) of companies in database." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added checking status (need to update or no) of companies in database." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/model/Company.java</url>
-          <line>30</line>
+          <line>32</line>
           <properties class="model.Company" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controllers/Controller.java</url>
+          <line>93</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1077,60 +1088,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/daoImpl/DbCompany.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/Company.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1151#1152#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/Company.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1151#1152#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/CompanyExchange.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controllers/TestClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1164,8 +1121,8 @@
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1650#1658#0" expanded="true" />
-            <element signature="e#1725#1733#0" expanded="true" />
+            <element signature="e#1985#1993#0" expanded="true" />
+            <element signature="e#2976#2984#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1218,8 +1175,8 @@
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1650#1658#0" expanded="true" />
-            <element signature="e#1725#1733#0" expanded="true" />
+            <element signature="e#1985#1993#0" expanded="true" />
+            <element signature="e#2976#2984#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1272,8 +1229,8 @@
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1650#1658#0" expanded="true" />
-            <element signature="e#1725#1733#0" expanded="true" />
+            <element signature="e#1985#1993#0" expanded="true" />
+            <element signature="e#2976#2984#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1326,8 +1283,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1650#1658#0" expanded="true" />
-            <element signature="e#1725#1733#0" expanded="true" />
+            <element signature="e#1985#1993#0" expanded="true" />
+            <element signature="e#2976#2984#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1401,20 +1358,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/TestClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/NeuralNetwork.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1448,23 +1391,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/DbDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/daoImpl/DbSingleton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1476,20 +1402,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/CompanyExchange.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/TestClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/others/ViewChanger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/daoImpl/DbSingleton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <element signature="e#804#805#0" expanded="false" />
+            <element signature="e#847#848#0" expanded="false" />
+            <element signature="e#1145#1146#0" expanded="false" />
+            <element signature="e#1195#1196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/DbDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31077695">
+          <caret line="2579" column="0" selection-start-line="2579" selection-start-column="0" selection-end-line="2579" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/javafx-src.zip!/javafx/scene/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8216" column="0" selection-start-line="8216" selection-start-column="0" selection-end-line="8216" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/javafx-src.zip!/javafx/scene/control/Button.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/javafx-src.zip!/javafx/scene/Scene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7221298">
+          <caret line="2474" column="9" selection-start-line="2474" selection-start-column="9" selection-end-line="2474" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/javafx-src.zip!/javafx/event/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7454243">
+          <caret line="197" column="0" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/daoImpl/DbCompany.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.034483">
+          <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
+          <folding>
+            <marker date="1444325168774" expanded="true" signature="3952:3990" placeholder="Select count..company..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/CompanyExchange.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/others/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0344827">
+          <caret line="66" column="23" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1985#1993#0" expanded="true" />
+            <element signature="e#2976#2984#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1497,32 +1514,43 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/model/Company.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1151#1152#0" expanded="true" />
+            <element signature="e#403#404#0" expanded="true" />
+            <element signature="e#469#470#0" expanded="true" />
+            <element signature="e#1215#1216#0" expanded="true" />
+            <element signature="e#1267#1268#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/others/Parser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+        <state vertical-scroll-proportion="-8.931034">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1650#1658#0" expanded="true" />
-            <element signature="e#1725#1733#0" expanded="true" />
+            <element signature="e#1568#2091#0" expanded="true" />
+            <element signature="e#2090#2091#0" expanded="true" />
+            <element signature="e#2129#2410#0" expanded="true" />
+            <element signature="e#2409#2410#0" expanded="true" />
+            <element signature="e#2449#2690#0" expanded="true" />
+            <element signature="e#2689#2690#0" expanded="true" />
+            <element signature="e#2732#2932#0" expanded="true" />
+            <element signature="e#2931#2932#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.655527">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        <state vertical-scroll-proportion="-1.8120301">
+          <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2284#2425#0" expanded="true" />
+            <element signature="e#2424#2425#0" expanded="true" />
           </folding>
         </state>
       </provider>

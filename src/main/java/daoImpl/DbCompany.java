@@ -1,17 +1,16 @@
 package daoImpl;
 
 import dao.DbDao;
-//import javafx.scene.control.Alert;
 import model.Company;
 import model.CompanyExchange;
 import others.Parser;
-//import others.MyAlerts;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.swing.*;
-import java.sql.Statement;
 import java.util.List;
+
+//import javafx.scene.control.Alert;
+//import others.MyAlerts;
 
 /**
  * Created by odin on 15.04.15.
@@ -47,7 +46,9 @@ public class DbCompany implements DbDao {
             return true;
         } catch (Exception e) {
             //MyAlerts.showAlert("Error!", "Can't save company!", Alert.AlertType.ERROR, "Error!");
-            entityManager.getTransaction().rollback();
+            if (entityManager.getTransaction() != null) {
+                entityManager.getTransaction().rollback();
+            }
             e.printStackTrace();
             return false;
         }

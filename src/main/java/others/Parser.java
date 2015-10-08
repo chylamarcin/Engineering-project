@@ -1,36 +1,30 @@
 package others;
 
-        import dao.DbDao;
-        import daoImpl.DbCompany;
-        import model.Company;
-        import model.CompanyExchange;
-        import org.jsoup.Jsoup;
-        import org.jsoup.nodes.Document;
-        import org.jsoup.nodes.Element;
-        import org.jsoup.select.Elements;
+import controllers.Controller;
+import dao.DbDao;
+import daoImpl.DbCompany;
+import model.Company;
+import model.CompanyExchange;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
-        import javax.swing.*;
-        import java.io.BufferedReader;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import java.io.InputStreamReader;
-        import java.net.MalformedURLException;
-        import java.net.URL;
-        import java.text.DateFormat;
-        import java.util.*;
-        import java.text.SimpleDateFormat;
-        import java.util.jar.JarOutputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by odin on 27.05.15.
  */
 public class Parser implements DbDao {
 
-
-    public static void getTitle() {
-
-        DbCompany dbCompany = new DbCompany();
-        //Download page source
+    public static Document getSiteDoc() {
         URL url;
         InputStream is = null;
         BufferedReader br;
@@ -48,60 +42,84 @@ public class Parser implements DbDao {
             }
             html = buf.toString();
 
-            Document doc = Jsoup.parse(html);
-
-            LinkedList<String> listOfCompanyNames = new LinkedList<String>();
-            LinkedList<String> listOfCompanyValues = new LinkedList<String>();
-            Elements tabElements = doc.getElementsByClass("colWalor");
-            Elements tabElementsCurse  = doc.getElementsByClass("colKurs");
-
-
-            for (int i = 1; i < tabElements.size(); i++) {
-                String companyName = tabElements.get(i).text();
-                String companyValue = tabElementsCurse.get(i).text();
-                listOfCompanyNames.add(companyName);
-                listOfCompanyValues.add(companyValue);
+        } catch (MalformedURLException mue) {
+            mue.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } finally {
+            try {
+                if (is != null) is.close();
+            } catch (IOException ioe) {
+                // nothing to see here
             }
+        }
 
-            Date date = new Date();
+        Document doc = Jsoup.parse(html);
+        return doc;
+    }
 
-            ArrayList<Company> companies = new ArrayList<Company>();
+    public static int getCountOfSiteCompany() {
+        Document doc = getSiteDoc();
+        Elements tabElements = doc.getElementsByClass("colWalor");
+        return tabElements.size() - 1;
+    }
 
-            for (int i = 0; i < listOfCompanyNames.size(); i++) {
+    public static void getCompanies() {
+        DbCompany dbCompany = new DbCompany();
+        //Download page source
+
+        Document doc = getSiteDoc();
+
+        LinkedList<String> listOfCompanyNames = new LinkedList<String>();
+        Elements tabElements = doc.getElementsByClass("colWalor");
+
+        for (int i = 1; i < tabElements.size(); i++) {
+            String companyName = tabElements.get(i).text();
+            listOfCompanyNames.add(companyName);
+        }
+
+        for (int i = 0; i < listOfCompanyNames.size(); i++) {
+            //System.out.println(listOfCompanyNames.size());
+            Boolean companyName = false;
+            companyName = dbCompany.booleanFindCompany(listOfCompanyNames.get(i));
+            if (companyName == false) {
                 Company company = new Company();
                 company.setCompanyName(listOfCompanyNames.get(i));
-                companies.add(company);
+                dbCompany.saveCompany(company);
             }
+        }
+    }
 
-            for (int i = 0; i < listOfCompanyNames.size(); i++) {
-                Boolean companyName = false;
-                companyName = dbCompany.booleanFindCompany(listOfCompanyNames.get(i));
-                if (companyName == false) {
-                    dbCompany.saveCompany(companies.get(i));
-                }
-            }
+    public static void getValues() {
 
-            for (int i = 0; i < listOfCompanyNames.size(); i++) {
-                Company company = dbCompany.findCompany(listOfCompanyNames.get(i));
+        Document doc = getSiteDoc();
+        DbCompany dbCompany = new DbCompany();
+        List<Company> listOfCompany = dbCompany.loadAllCompanies();
 
-                CompanyExchange companyExchange = new CompanyExchange();
-                companyExchange.setValue(listOfCompanyValues.get(i));
-                companyExchange.setCompany(company);
-                companyExchange.setDate(date);
-                company.addExchange(companyExchange);
+        LinkedList<String> listOfCompanyValues = new LinkedList<String>();
+        Elements tabElementsCurse = doc.getElementsByClass("colKurs");
+        Date date = new Date();
 
-                if (company.getCompanyName() == dbCompany.findCompany(listOfCompanyNames.get(i)).getCompanyName()) {
-                    dbCompany.updateCompany(company);
-                    dbCompany.saveCompanyExchange(companyExchange);
-                } else {
-                    dbCompany.saveCompany(company);
-                    dbCompany.saveCompanyExchange(companyExchange);
-                }
+        for (int i = 1; i < tabElementsCurse.size(); i++) {
+            String companyValue = tabElementsCurse.get(i).text();
+            listOfCompanyValues.add(companyValue);
+        }
 
-            }
+        for (int i = 0; i < listOfCompanyValues.size(); i++) {
+            //System.out.println(listOfCompanyValues.size());
+            Company company = listOfCompany.get(i);
 
-        }  catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "Nie wykryto po??czenia z internetem.");
+            CompanyExchange companyExchange = new CompanyExchange();
+            companyExchange.setValue(listOfCompanyValues.get(i));
+            companyExchange.setCompany(company);
+            companyExchange.setDate(date);
+            company.addExchange(companyExchange);
+
+            dbCompany.saveCompanyExchange(companyExchange);
+            System.out.println((double) i / (double) listOfCompanyValues.size());
+
+            Controller.progressBar.setProgress(0.56);
+
         }
 
     }

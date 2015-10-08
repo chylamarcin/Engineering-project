@@ -1,10 +1,13 @@
 package main;
 
+import daoImpl.DbCompany;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataPair;
@@ -45,17 +48,39 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Backward Propagation");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root));
+        DbCompany dbCompany = new DbCompany();
+
+        if (dbCompany.checkCompaniesCount()) {
+            JOptionPane.showMessageDialog(null, "Companies are up to date.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Wait, program need to update companies database.");
+            Parser.getCompanies();
+            Parser.getValues();
+        }
+
         primaryStage.show();
+
+        //close operation
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent event) {
+                System.exit(0);
+            }
+        });
+
+
     }
 
     public static void main(String[] args) {
+        launch(args);
 
-       Parser.getTitle();
 
     }
 
-    public void createAndTrainNetwork(double[][] input, double[][] ideal){
+    //Parser.getTitle();
+
+
+    public void createAndTrainNetwork(double[][] input, double[][] ideal) {
         BasicNetwork network2 = new BasicNetwork();
         network2.addLayer(new BasicLayer(null, true, 4));
         network2.addLayer(new BasicLayer(new ActivationSigmoid(), true, 8));
@@ -108,7 +133,6 @@ public class Main extends Application {
             System.out.println("Jeszcze tylko " + (10000000 - i + 1));
         }
     }
-
 
 
     public static double[] trainNewNetwork(BasicNetwork newNetwork, MLDataSet trainingSet) {

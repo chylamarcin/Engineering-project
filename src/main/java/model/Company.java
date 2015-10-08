@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class Company {
     private List<CompanyExchange> listOfExchanges;
 
     public Company() {
-
+        listOfExchanges = new ArrayList<CompanyExchange>();
     }
 
     public Company(String companyName, CompanyExchange companyExchange){

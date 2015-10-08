@@ -1,5 +1,7 @@
 package model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,6 +15,7 @@ public class CompanyExchange {
     @GeneratedValue
     private long id;
     @Column
+    @Type(type = "date")
     private Date date;
 
     @Column
