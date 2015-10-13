@@ -1,5 +1,8 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +51,11 @@ public class Company {
 
     public List<CompanyExchange> getListOfExchanges() {
         return listOfExchanges;
+    }
+
+    public ObservableList<CompanyExchange> getObsList() {
+        ObservableList<CompanyExchange> obsList = FXCollections.observableArrayList(listOfExchanges);
+        return obsList;
     }
 
     public void setListOfExchanges(List<CompanyExchange> listOfExchanges) {

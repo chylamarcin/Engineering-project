@@ -1,6 +1,5 @@
 package others;
 
-import controllers.Controller;
 import dao.DbDao;
 import daoImpl.DbCompany;
 import model.Company;
@@ -86,6 +85,7 @@ public class Parser implements DbDao {
                 Company company = new Company();
                 company.setCompanyName(listOfCompanyNames.get(i));
                 dbCompany.saveCompany(company);
+                //System.out.println(company.getCompanyName());
             }
         }
     }
@@ -118,7 +118,7 @@ public class Parser implements DbDao {
             dbCompany.saveCompanyExchange(companyExchange);
             System.out.println((double) i / (double) listOfCompanyValues.size());
 
-            Controller.progressBar.setProgress(0.56);
+            //Controller.progressBar.setProgress(0.56);
 
         }
 

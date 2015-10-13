@@ -1,17 +1,21 @@
 package controllers;
 
 import daoImpl.DbCompany;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.Company;
+import model.CompanyExchange;
+import org.joda.time.DateTime;
 import others.Parser;
 
+import javax.swing.*;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -27,10 +31,22 @@ public class Controller implements Initializable {
     private Button btnGetValues;
 
     @FXML
+    private Button buttonLoad;
+
+    @FXML
     private Button btnGetComapnies;
 
     @FXML
     public static ProgressBar progressBar;
+
+    @FXML
+    private TableColumn<CompanyExchange, String> colValue;
+
+    @FXML
+    private TableColumn<CompanyExchange, String> colDate;
+
+    @FXML
+    private TableView<CompanyExchange> tableView; //to jest ta? nie mam innej :v ok
 
     private DbCompany dbCompany = new DbCompany();
 
@@ -38,10 +54,12 @@ public class Controller implements Initializable {
     private List<Company> listOfFilteredCompanies;
 
     public void initialize(URL location, ResourceBundle resources) {
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colValue.setCellValueFactory(new PropertyValueFactory<>("value"));
+
         progressBar = new ProgressBar();
 
         cbCompanies.setDisable(true);
-        //btnGetValues.setDisable(true);
         btnGetComapnies.setVisible(false);
 
         for (char i = '0'; i <= '9'; i++) {
@@ -77,10 +95,22 @@ public class Controller implements Initializable {
 
             public void handle(ActionEvent event) {
 
-                progressBar.setProgress(0);
-                progressBar.setProgress(0.50);
+                //progressBar.setProgress(0);
+                //progressBar.setProgress(0.50);
 
-                Parser.getValues();
+
+                List<Company> companToCheckDate = dbCompany.loadAllCompanies();
+                List<CompanyExchange> exchangeToCheckDate = companToCheckDate.get(companToCheckDate.size() - 1).getListOfExchanges();
+                Date lastDate = exchangeToCheckDate.get(exchangeToCheckDate.size() - 1).getDate();
+                DateTime lastJDate = new DateTime(lastDate);
+                DateTime currentJDate = new DateTime(new Date());
+
+                if (currentJDate.toLocalDate().compareTo(lastJDate.toLocalDate()) == 0) {
+                    JOptionPane.showMessageDialog(null, "Values are up to date!");
+                }
+                {
+                    Parser.getValues();
+                }
 
 
             }
@@ -94,6 +124,23 @@ public class Controller implements Initializable {
 
             }
         }));
+
+        buttonLoad.setOnAction((new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                if (cbCompanies.getSelectionModel().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please select a company.");
+                } else {
+                    Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
+                    ObservableList<CompanyExchange> c = company.getObsList();
+                    tableView.setItems(c);
+                    System.out.println(tableView.getItems().get(0).getValue());
+                }
+
+
+            }
+        }));
+
 
     }
 
