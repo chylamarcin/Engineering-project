@@ -134,7 +134,6 @@ public class Controller implements Initializable {
                     Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
                     ObservableList<CompanyExchange> c = company.getObsList();
                     tableView.setItems(c);
-                    System.out.println(tableView.getItems().get(0).getValue());
                 }
 
 
