@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added table to show selected&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_8_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/controllers/Controller.class" afterPath="$PROJECT_DIR$/target/classes/controllers/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/main/Main.class" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/controllers/TestClass.class" afterPath="$PROJECT_DIR$/target/classes/controllers/TestClass.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controllers/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/daoImpl/DbCompany.java" afterPath="$PROJECT_DIR$/src/main/java/daoImpl/DbCompany.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/others/Parser.java" afterPath="$PROJECT_DIR$/src/main/java/others/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/sample.fxml" afterPath="$PROJECT_DIR$/target/classes/sample.fxml" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="More stable than earlier.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -75,10 +64,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.6472081">
               <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
               <folding>
                 <element signature="e#2444#2445#0" expanded="true" />
@@ -120,7 +109,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="20" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="20" />
+              <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -170,14 +159,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/others/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.049315">
-              <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
+            <state vertical-scroll-proportion="25.793104">
+              <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
               <folding>
-                <element signature="e#2160#2168#0" expanded="true" />
-                <element signature="e#3213#3221#0" expanded="true" />
+                <element signature="e#2067#2075#0" expanded="true" />
+                <element signature="e#3120#3128#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -189,7 +178,7 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="111" column="19" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
               <folding>
-                <marker date="1444917531308" expanded="true" signature="3907:3945" placeholder="Select count..company..." />
+                <marker date="1444923781428" expanded="true" signature="3907:3945" placeholder="Select count..company..." />
               </folding>
             </state>
           </provider>
@@ -916,7 +905,7 @@
       <workItem from="1444813485275" duration="259000" />
       <workItem from="1444827887202" duration="2092000" />
       <workItem from="1444852453888" duration="3429000" />
-      <workItem from="1444892585514" duration="10605000" />
+      <workItem from="1444892585514" duration="10697000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1432735842541</created>
@@ -1050,11 +1039,17 @@
       <option name="project" value="LOCAL" />
       <updated>1444748455499</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="More stable than earlier.">
+      <created>1444923788173</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1444923788173</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143686000" />
+    <option name="totallyTimeSpent" value="143778000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="738" extended-state="0" />
@@ -1119,7 +1114,8 @@
     <MESSAGE value="Added auto-checking and auto update of companies at start of program.&#10;Repaired bug with last company exchange value nullpointer exception.&#10;Added simple GUI. Added some database methods.&#10;" />
     <MESSAGE value="Added tableView to show selected company exchanges and date of this exchanges.&#10;Added protection from nullpointer exception when someone want load data to table without selected company from combobox. Added JodaTime library. Added maven dependencey to maven plugin." />
     <MESSAGE value="Just deleted sout line what was needed before  to test tableview values when this values was invisible." />
-    <option name="LAST_COMMIT_MESSAGE" value="Just deleted sout line what was needed before  to test tableview values when this values was invisible." />
+    <MESSAGE value="More stable than earlier." />
+    <option name="LAST_COMMIT_MESSAGE" value="More stable than earlier." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1133,7 +1129,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controllers/Controller.java</url>
-          <line>125</line>
+          <line>124</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
@@ -1187,8 +1183,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
-            <element signature="e#2160#2168#0" expanded="true" />
-            <element signature="e#3213#3221#0" expanded="true" />
+            <element signature="e#2067#2075#0" expanded="true" />
+            <element signature="e#3120#3128#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1241,8 +1237,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
-            <element signature="e#2160#2168#0" expanded="true" />
-            <element signature="e#3213#3221#0" expanded="true" />
+            <element signature="e#2067#2075#0" expanded="true" />
+            <element signature="e#3120#3128#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1295,8 +1291,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2160#2168#0" expanded="true" />
-            <element signature="e#3213#3221#0" expanded="true" />
+            <element signature="e#2067#2075#0" expanded="true" />
+            <element signature="e#3120#3128#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1547,7 +1543,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/controllers/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="20" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="20" />
+          <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1559,29 +1555,29 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="111" column="19" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
           <folding>
-            <marker date="1444917531308" expanded="true" signature="3907:3945" placeholder="Select count..company..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
-          <folding>
-            <element signature="e#2444#2445#0" expanded="true" />
-            <element signature="e#2490#2491#0" expanded="true" />
+            <marker date="1444923781428" expanded="true" signature="3907:3945" placeholder="Select count..company..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/others/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.049315">
-          <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
+        <state vertical-scroll-proportion="25.793104">
+          <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
           <folding>
-            <element signature="e#2160#2168#0" expanded="true" />
-            <element signature="e#3213#3221#0" expanded="true" />
+            <element signature="e#2067#2075#0" expanded="true" />
+            <element signature="e#3120#3128#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6472081">
+          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+          <folding>
+            <element signature="e#2444#2445#0" expanded="true" />
+            <element signature="e#2490#2491#0" expanded="true" />
           </folding>
         </state>
       </provider>
