@@ -4,6 +4,7 @@ import dao.DbDao;
 import daoImpl.DbCompany;
 import model.Company;
 import model.CompanyExchange;
+import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -58,9 +59,13 @@ public class Parser implements DbDao {
     }
 
     public static int getCountOfSiteCompany() {
-        Document doc = getSiteDoc();
-        Elements tabElements = doc.getElementsByClass("colWalor");
-        return tabElements.size() - 1;
+        try {
+            Document doc = getSiteDoc();
+            Elements tabElements = doc.getElementsByClass("colWalor");
+            return tabElements.size() - 1;
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
     public static void getCompanies() {
@@ -85,20 +90,23 @@ public class Parser implements DbDao {
                 Company company = new Company();
                 company.setCompanyName(listOfCompanyNames.get(i));
                 dbCompany.saveCompany(company);
-                //System.out.println(company.getCompanyName());
+
             }
+
         }
+        System.out.println(listOfCompanyNames.size());
     }
 
     public static void getValues() {
 
         Document doc = getSiteDoc();
         DbCompany dbCompany = new DbCompany();
-        List<Company> listOfCompany = dbCompany.loadAllCompanies();
+        List<Company> listOfCompany = dbCompany.loadAlphabetCompanies();
 
         LinkedList<String> listOfCompanyValues = new LinkedList<String>();
         Elements tabElementsCurse = doc.getElementsByClass("colKurs");
         Date date = new Date();
+        DateTime currentJDate = new DateTime(new Date());
 
         for (int i = 1; i < tabElementsCurse.size(); i++) {
             String companyValue = tabElementsCurse.get(i).text();
@@ -106,22 +114,17 @@ public class Parser implements DbDao {
         }
 
         for (int i = 0; i < listOfCompanyValues.size(); i++) {
-            //System.out.println(listOfCompanyValues.size());
-            Company company = listOfCompany.get(i);
 
+            Company company = listOfCompany.get(i);
             CompanyExchange companyExchange = new CompanyExchange();
             companyExchange.setValue(listOfCompanyValues.get(i));
             companyExchange.setCompany(company);
             companyExchange.setDate(date);
             company.addExchange(companyExchange);
-
             dbCompany.saveCompanyExchange(companyExchange);
-            System.out.println((double) i / (double) listOfCompanyValues.size());
-
-            //Controller.progressBar.setProgress(0.56);
 
         }
-
     }
+
 
 }

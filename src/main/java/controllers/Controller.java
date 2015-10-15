@@ -50,17 +50,19 @@ public class Controller implements Initializable {
 
     private DbCompany dbCompany = new DbCompany();
 
-    private List<Company> listOfCompanies = dbCompany.loadAllCompanies();
+    private List<Company> listOfCompanies;// = dbCompany.loadAllCompanies();
     private List<Company> listOfFilteredCompanies;
 
     public void initialize(URL location, ResourceBundle resources) {
+
+
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colValue.setCellValueFactory(new PropertyValueFactory<>("value"));
 
         progressBar = new ProgressBar();
 
         cbCompanies.setDisable(true);
-        btnGetComapnies.setVisible(false);
+        btnGetComapnies.setVisible(true);
 
         for (char i = '0'; i <= '9'; i++) {
             cbFilter.getItems().add(String.valueOf(i));
@@ -98,19 +100,25 @@ public class Controller implements Initializable {
                 //progressBar.setProgress(0);
                 //progressBar.setProgress(0.50);
 
+                DateTime lastJDate = null;
+                DateTime currentJDate = null;
 
-                List<Company> companToCheckDate = dbCompany.loadAllCompanies();
-                List<CompanyExchange> exchangeToCheckDate = companToCheckDate.get(companToCheckDate.size() - 1).getListOfExchanges();
-                Date lastDate = exchangeToCheckDate.get(exchangeToCheckDate.size() - 1).getDate();
-                DateTime lastJDate = new DateTime(lastDate);
-                DateTime currentJDate = new DateTime(new Date());
-
-                if (currentJDate.toLocalDate().compareTo(lastJDate.toLocalDate()) == 0) {
-                    JOptionPane.showMessageDialog(null, "Values are up to date!");
-                }
-                {
+                try {
+                    List<Company> companToCheckDate = dbCompany.loadAllCompanies();
+                    List<CompanyExchange> exchangeToCheckDate = companToCheckDate.get(companToCheckDate.size() - 1).getListOfExchanges();
+                    Date lastDate = exchangeToCheckDate.get(exchangeToCheckDate.size() - 1).getDate();
+                    lastJDate = new DateTime(lastDate);
+                    currentJDate = new DateTime(new Date());
+                    if (currentJDate.toLocalDate().compareTo(lastJDate.toLocalDate()) == 0) {
+                        JOptionPane.showMessageDialog(null, "Values are up to date!");
+                    } else {
+                        Parser.getValues();
+                    }
+                } catch (Exception ArrayIndexOutOfBoundsException) {
+                    System.out.println("date problem");
                     Parser.getValues();
                 }
+
 
 
             }
@@ -135,6 +143,15 @@ public class Controller implements Initializable {
                     ObservableList<CompanyExchange> c = company.getObsList();
                     tableView.setItems(c);
                 }
+
+
+            }
+        }));
+
+        btnGetComapnies.setOnAction((new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                Parser.getCompanies();
 
 
             }

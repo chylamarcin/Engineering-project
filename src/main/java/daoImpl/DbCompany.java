@@ -163,6 +163,13 @@ public class DbCompany implements DbDao {
         return resultCompanyList;
     }
 
+    public List<Company> loadAlphabetCompanies() {
+        TypedQuery<Company> createQuery = entityManager.createQuery(
+                "select t from Company t order by t.companyName", Company.class);
+        List<Company> resultCompanyList = createQuery.getResultList();
+        return resultCompanyList;
+    }
+
     public List<Company> loadAllCompaniesOnLetter(String letter) {
         TypedQuery<Company> createQuery = entityManager.createQuery(
                 "select t from Company t where t.companyName like :x", Company.class);
@@ -170,5 +177,6 @@ public class DbCompany implements DbDao {
         List<Company> resultCompanyList = createQuery.getResultList();
         return resultCompanyList;
     }
+
 
 }

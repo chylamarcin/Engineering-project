@@ -51,7 +51,9 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         DbCompany dbCompany = new DbCompany();
 
-        if (dbCompany.checkCompaniesCount()) {
+        if (Parser.getCountOfSiteCompany() == -1) {
+            JOptionPane.showMessageDialog(null, "Check your internet connection!");
+        } else if (dbCompany.checkCompaniesCount()) {
             JOptionPane.showMessageDialog(null, "Companies are up to date.");
         } else {
             JOptionPane.showMessageDialog(null, "Wait, program need to update companies database.");
