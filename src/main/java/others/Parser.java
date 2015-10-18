@@ -9,6 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -124,6 +125,7 @@ public class Parser implements DbDao {
             dbCompany.saveCompanyExchange(companyExchange);
 
         }
+        JOptionPane.showMessageDialog(null, "Done.");
     }
 
 

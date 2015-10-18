@@ -103,6 +103,9 @@ public class Controller implements Initializable {
                 DateTime lastJDate = null;
                 DateTime currentJDate = null;
 
+                btnGetComapnies.setDisable(true);
+                btnGetValues.setDisable(true);
+
                 try {
                     List<Company> companToCheckDate = dbCompany.loadAllCompanies();
                     List<CompanyExchange> exchangeToCheckDate = companToCheckDate.get(companToCheckDate.size() - 1).getListOfExchanges();
@@ -119,6 +122,8 @@ public class Controller implements Initializable {
                     Parser.getValues();
                 }
 
+                btnGetComapnies.setDisable(false);
+                btnGetValues.setDisable(false);
 
 
             }
