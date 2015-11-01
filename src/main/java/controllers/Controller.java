@@ -135,6 +135,7 @@ public class Controller implements Initializable {
                 Parser.getCompanies();
                 //btnGetValues.setDisable(false);
 
+
             }
         }));
 

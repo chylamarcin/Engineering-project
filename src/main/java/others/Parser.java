@@ -23,6 +23,8 @@ import java.util.List;
 /**
  * Created by odin on 27.05.15.
  */
+
+
 public class Parser implements DbDao {
 
     public static Document getSiteDoc() {
@@ -78,12 +80,12 @@ public class Parser implements DbDao {
         LinkedList<String> listOfCompanyNames = new LinkedList<String>();
         Elements tabElements = doc.getElementsByClass("colWalor");
 
-        for (int i = 1; i < tabElements.size(); i++) {
+        for (int i = 0; i < tabElements.size(); i++) {
             String companyName = tabElements.get(i).text();
             listOfCompanyNames.add(companyName);
         }
 
-        for (int i = 0; i < listOfCompanyNames.size(); i++) {
+        for (int i = 1; i < listOfCompanyNames.size(); i++) {
             //System.out.println(listOfCompanyNames.size());
             Boolean companyName = false;
             companyName = dbCompany.booleanFindCompany(listOfCompanyNames.get(i));
@@ -91,12 +93,51 @@ public class Parser implements DbDao {
                 Company company = new Company();
                 company.setCompanyName(listOfCompanyNames.get(i));
                 dbCompany.saveCompany(company);
+            }
+
+        }
+
+        checkCompanies();
+    }
+
+    public static void checkCompanies() {
+        DbCompany dbCompany = new DbCompany();
+        //Download page source
+        //System.out.println("start");
+        Document doc = getSiteDoc();
+
+        LinkedList<String> listOfSiteCompanyNames = new LinkedList<String>();
+        Elements tabElements = doc.getElementsByClass("colWalor");
+
+        for (int i = 0; i < tabElements.size(); i++) {
+            String companyName = tabElements.get(i).text();
+            listOfSiteCompanyNames.add(companyName);
+        }
+
+        listOfSiteCompanyNames.remove(0);
+
+        List<Company> listAlphaOfCompany = dbCompany.loadAlphabetCompanies();
+        boolean bol = false;
+        for (int i = 0; i < listOfSiteCompanyNames.size(); i++) {
+
+            if (listAlphaOfCompany.get(i).getCompanyName().equals(listOfSiteCompanyNames.get(i))) {
+
+            } else {
+                Long id = listAlphaOfCompany.get(i).getId();
+                bol = dbCompany.deleteAssociationsById(id);
+                bol = dbCompany.deteleteCompanyById(id);
+                if (bol == true) {
+                    System.out.println("Deleted " + listAlphaOfCompany.get(i).getCompanyName());
+                    listAlphaOfCompany = dbCompany.loadAlphabetCompanies();
+                    i = 0;
+                }
 
             }
 
         }
-        System.out.println(listOfCompanyNames.size());
+
     }
+
 
     public static void getValues() {
 
@@ -109,13 +150,16 @@ public class Parser implements DbDao {
         Date date = new Date();
         DateTime currentJDate = new DateTime(new Date());
 
-        for (int i = 1; i < tabElementsCurse.size(); i++) {
+
+        for (int i = 0; i < tabElementsCurse.size(); i++) {
             String companyValue = tabElementsCurse.get(i).text();
             listOfCompanyValues.add(companyValue);
         }
 
-        for (int i = 0; i < listOfCompanyValues.size(); i++) {
+        listOfCompanyValues.remove(0);
+        for (int i = 0; i < listOfCompanyValues.size(); ++i) {
 
+            System.out.println(i + " " + listOfCompany.get(i).getCompanyName() + " " + listOfCompanyValues.get(i));
             Company company = listOfCompany.get(i);
             CompanyExchange companyExchange = new CompanyExchange();
             companyExchange.setValue(listOfCompanyValues.get(i));

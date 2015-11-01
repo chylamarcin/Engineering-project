@@ -21,7 +21,7 @@ public class Company {
     @Column
     private String companyName;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "company")
     private List<CompanyExchange> listOfExchanges;
 
     public Company() {

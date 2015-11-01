@@ -109,6 +109,43 @@ public class DbCompany implements DbDao {
         }
     }
 
+
+    public boolean deleteAssociationsById(Long id) {
+
+        try {
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
+            }
+            Query query = entityManager.createNativeQuery("delete from companyExchange where companyId = ?1");
+            query.setParameter(1, id);
+            query.executeUpdate();
+
+            //deteleteCompanyById(id);
+
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            //entityManager.getTransaction().rollback();
+            return false;
+        }
+    }
+
+    public boolean deteleteCompanyById(Long id) {
+        try {
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
+            }
+            Query query = query = entityManager.createNativeQuery("DELETE FROM test.company WHERE id=?1");
+            query.setParameter(1, id);
+            query.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            //entityManager.getTransaction().rollback();
+            return false;
+        }
+    }
+
     public Boolean checkCompaniesCount() {
 
         try {
