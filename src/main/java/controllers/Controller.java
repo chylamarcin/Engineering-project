@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Company;
 import model.CompanyExchange;
+import model.Network;
 import org.joda.time.DateTime;
 import others.Parser;
 
@@ -20,6 +21,7 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -191,11 +193,27 @@ public class Controller implements Initializable {
                 if (cbCompanies.getSelectionModel().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please select a company.");
                 } else {
-                    dbCompany.booleanFindCompany(cbCompanies.getSelectionModel().getSelectedItem());
-                    int min = 1;
+                    Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
+
                     int max = listOfCompanies.size();
-                    int id = min + (int) (Math.random() * ((max - min) + 1));
-                    testLabel.setText((id + ""));
+                    int[] companiesNumbers = new Random().ints(1, max).distinct().limit(3).toArray();
+                    Company company2 = listOfCompanies.get(companiesNumbers[0]);
+                    Company company3 = listOfCompanies.get(companiesNumbers[1]);
+                    Company company4 = listOfCompanies.get(companiesNumbers[2]);
+
+                    Network network = new Network();
+                    network.dividors = new double[4];
+                    double[][] d = network.companyNormalize(company, company2, company3, company4);
+
+                    for (int i = 0; i < d.length; i++) {
+                        for (int j = 0; j < d[i].length; j++) {
+                            System.out.print(d[i][j] + " | ");
+                        }
+                        System.out.println();
+                    }
+
+                    //int id = min + (int) (Math.random() * ((max - min) + 1));
+                    //int id2 = min + (int) (Math.random() * ((max - min) + 1));
                 }
 
             }

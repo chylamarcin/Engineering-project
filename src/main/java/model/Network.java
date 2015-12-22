@@ -27,81 +27,8 @@ public class Network {
     private Company randomCompany1;
     private Company randomCompany2;
     private Company randomCompany3;
-    public double[] dividors;
+    public double[] dividors = new double[4];
 
-    public Network(Company selectedCompany, Company randomCompany1, Company randomCompany2, Company randomCompany3) {
-        this.selectedCompany = selectedCompany;
-        this.randomCompany1 = randomCompany1;
-        this.randomCompany2 = randomCompany2;
-        this.randomCompany3 = randomCompany3;
-    }
-
-    public Network() {
-    }
-
-    private double[][] companyNormalize(Company company, Company rndCompany, Company rnd2Company, Company rnd3Company) {
-
-        List<Double> listOfValues = new ArrayList<>();
-        List<Double> listOfValues2 = new ArrayList<>();
-        List<Double> listOfValues3 = new ArrayList<>();
-        List<Double> listOfValues4 = new ArrayList<>();
-        List<List<Double>> listOfListOfValues = new ArrayList<List<Double>>(4);
-        List<CompanyExchange> listOfExchange = company.getListOfExchanges();
-        List<CompanyExchange> listOfExchange2 = rndCompany.getListOfExchanges();
-        List<CompanyExchange> listOfExchange3 = rnd2Company.getListOfExchanges();
-        List<CompanyExchange> listOfExchange4 = rnd3Company.getListOfExchanges();
-
-        for (int i = 0; i < listOfExchange.size(); i++) {
-            listOfValues.add(Double.valueOf(listOfExchange.get(i).getValue()));
-            listOfValues2.add(Double.valueOf(listOfExchange2.get(i).getValue()));
-            listOfValues3.add(Double.valueOf(listOfExchange3.get(i).getValue()));
-            listOfValues4.add(Double.valueOf(listOfExchange4.get(i).getValue()));
-        }
-
-        listOfListOfValues.add(listOfValues);
-        listOfListOfValues.add(listOfValues2);
-        listOfListOfValues.add(listOfValues3);
-        listOfListOfValues.add(listOfValues4);
-        double dividor;
-
-        int k = 0;
-        double[][] tableOfValues = new double[4][listOfValues.size()];
-        for (int i = 0; i < listOfValues.size(); i++) {
-            dividor = Collections.max(listOfListOfValues.get(i));
-            for (int j = 0; j < listOfListOfValues.size(); j++) {
-                tableOfValues[j][i] = listOfListOfValues.get(j).get(i) / dividor;
-            }
-            dividors[k] = dividor;
-            k++;
-        }
-
-        return tableOfValues;
-
-    }
-
-    public double[] denormalize(double[] outputTable) {
-        double[] output = new double[4];
-        for (int i = 0; i < outputTable.length; i++) {
-            output[i] = outputTable[i] * dividors[i];
-        }
-        return output;
-    }
-
-    private double[] prepareTables(double[] selectedCompany, double[] randomCompany1, double[] randomCompany2,
-                                   double[] randomCompany3, double[] randomCompany4, int day) {
-        double[] preparedTable = {selectedCompany[selectedCompany.length - day], randomCompany1[randomCompany1.length - day],
-                randomCompany3[randomCompany3.length - day], randomCompany4[randomCompany4.length - day]};
-
-        return preparedTable;
-    }
-
-    private double prepareIdealOutput(double[] selectedCompany, int day) {
-        if (selectedCompany.length - day + 1 > selectedCompany.length) {
-            return 0; // NARAZIE ZERO POTEM SIE POMYSLI
-        } else {
-            return selectedCompany[selectedCompany.length - day + 1];
-        }
-    }
 
     /**
      * The input necessary for XOR.
@@ -115,6 +42,117 @@ public class Network {
      * The ideal data necessary for XOR.
      */
     public static double ideal[][] = {{13.60 / 14.50}, {16.83 / 16.95}, {20.40 / 20.90}, {5.05 / 5.10}};
+
+    public Network(Company selectedCompany, Company randomCompany1, Company randomCompany2, Company randomCompany3) {
+        this.selectedCompany = selectedCompany;
+        this.randomCompany1 = randomCompany1;
+        this.randomCompany2 = randomCompany2;
+        this.randomCompany3 = randomCompany3;
+    }
+
+    public Network() {
+    }
+
+    public double[][] companyNormalize(Company company, Company rndCompany, Company rnd2Company, Company rnd3Company) {
+
+        List<Double> listOfValues = new ArrayList<>();
+        List<Double> listOfValues2 = new ArrayList<>();
+        List<Double> listOfValues3 = new ArrayList<>();
+        List<Double> listOfValues4 = new ArrayList<>();
+        List<List<Double>> listOfListOfValues = new ArrayList<List<Double>>(4);
+        List<CompanyExchange> listOfExchange = company.getListOfExchanges();
+        List<CompanyExchange> listOfExchange2 = rndCompany.getListOfExchanges();
+        List<CompanyExchange> listOfExchange3 = rnd2Company.getListOfExchanges();
+        List<CompanyExchange> listOfExchange4 = rnd3Company.getListOfExchanges();
+        double[][] tableOfValues = new double[4][];
+
+        String helpV2 = "";
+        try {
+            for (int i = 0; i < listOfExchange.size(); i++) {
+                helpV2 = listOfExchange.get(i).getValue().replace(",", ".");
+                if (helpV2.contains(" ")) {
+                    helpV2.replace(" ", "");
+                }
+                listOfValues.add(Double.parseDouble(helpV2));
+            }
+
+            for (int i = 0; i < listOfExchange2.size(); i++) {
+                helpV2 = listOfExchange2.get(i).getValue().replace(",", ".");
+                if (helpV2.contains(" ")) {
+                    helpV2.replace(" ", "");
+                }
+                listOfValues.add(Double.parseDouble(helpV2));
+            }
+
+            for (int i = 0; i < listOfExchange3.size(); i++) {
+                helpV2 = listOfExchange3.get(i).getValue().replace(",", ".");
+                if (helpV2.contains(" ")) {
+                    helpV2.replace(" ", "");
+                }
+                listOfValues.add(Double.parseDouble(helpV2));
+            }
+
+            for (int i = 0; i < listOfExchange4.size(); i++) {
+                helpV2 = listOfExchange4.get(i).getValue().replace(",", ".");
+                if (helpV2.contains(" ")) {
+                    helpV2.replace(" ", "");
+                }
+                listOfValues.add(Double.parseDouble(helpV2));
+            }
+
+            listOfListOfValues.add(listOfValues);
+            listOfListOfValues.add(listOfValues2);
+            listOfListOfValues.add(listOfValues3);
+            listOfListOfValues.add(listOfValues4);
+            double dividor;
+
+            int k = 0;
+            tableOfValues = new double[4][listOfValues.size()];
+            for (int i = listOfValues.size() - 5; i < listOfValues.size(); i++) {
+                dividor = Collections.max(listOfListOfValues.get(k));
+                for (int j = 0; j < listOfListOfValues.size(); j++) {
+                    tableOfValues[j][i] = listOfListOfValues.get(j).get(i) / dividor;
+                }
+                if (k < 3) {
+                    dividors[k] = dividor;
+                    k++;
+                }
+            }
+
+        } catch (Exception e) {
+            //System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+
+        return tableOfValues;
+
+    }
+
+    public double[] denormalize(double[] outputTable) {
+        double[] output = new double[4];
+        for (int i = 0; i < outputTable.length; i++) {
+            output[i] = outputTable[i] * dividors[i];
+        }
+        return output;
+    }
+
+    //TODO set it up to change result table[4][X] from companyNormalize to [4][5]
+    public double[] prepareTables(double[] selectedCompany, double[] randomCompany1, double[] randomCompany2,
+                                  double[] randomCompany3, double[] randomCompany4, int maxDay) {
+        double[] preparedTable = {selectedCompany[selectedCompany.length - maxDay], randomCompany1[randomCompany1.length - maxDay],
+                randomCompany3[randomCompany3.length - maxDay], randomCompany4[randomCompany4.length - maxDay]};
+
+        return preparedTable;
+    }
+
+    public double prepareIdealOutput(double[] selectedCompany, int day) {
+        if (selectedCompany.length - day + 1 > selectedCompany.length) {
+            return 0; // NARAZIE ZERO POTEM SIE POMYSLI
+        } else {
+            return selectedCompany[selectedCompany.length - day + 1];
+        }
+    }
 
     public void createAndTrainNetwork(double[][] input, double[][] ideal) {
         BasicNetwork network2 = new BasicNetwork();
@@ -170,7 +208,6 @@ public class Network {
         }
     }
 
-
     public static double[] trainNewNetwork(BasicNetwork newNetwork, MLDataSet trainingSet) {
 
         final ResilientPropagation train = new ResilientPropagation(newNetwork, trainingSet);
@@ -225,7 +262,6 @@ public class Network {
             z++;
 
         }
-
 
         for (int i = 0; i < newNetworkError.length; i++) {
             if (Math.abs(roundOff(oldNetworkError[i], 3)) >= Math.abs(roundOff(newNetworkError[i], 3))) {
