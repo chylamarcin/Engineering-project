@@ -46,9 +46,8 @@ public class Parser implements DbDao {
             html = buf.toString();
 
         } catch (MalformedURLException mue) {
-            mue.printStackTrace();
+
         } catch (IOException ioe) {
-            ioe.printStackTrace();
         } finally {
             try {
                 if (is != null) is.close();

@@ -6,7 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Company;
 import model.CompanyExchange;
@@ -14,6 +16,7 @@ import org.joda.time.DateTime;
 import others.Parser;
 
 import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +31,9 @@ public class Controller implements Initializable {
     private ComboBox<String> cbCompanies;
 
     @FXML
+    private Button btnGenerate;
+
+    @FXML
     private Button btnGetValues;
 
     @FXML
@@ -35,6 +41,9 @@ public class Controller implements Initializable {
 
     @FXML
     private Button btnGetComapnies;
+
+    @FXML
+    private Label testLabel;
 
     @FXML
     public static ProgressBar progressBar;
@@ -50,7 +59,7 @@ public class Controller implements Initializable {
 
     private DbCompany dbCompany = new DbCompany();
 
-    private List<Company> listOfCompanies;// = dbCompany.loadAllCompanies();
+    private List<Company> listOfCompanies = dbCompany.loadAllCompanies();
     private List<Company> listOfFilteredCompanies;
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -129,10 +138,23 @@ public class Controller implements Initializable {
             }
         }));
 
+
+        //TODO check if it work in other thread so i can display values in table at the same time when getting new values
         btnGetComapnies.setOnAction((new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
-                Parser.getCompanies();
+                EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        try {
+                            Parser.getCompanies();
+                            btnGetComapnies.setDisable(true);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage());
+                        }
+                    }
+                });
+
+                btnGetComapnies.setDisable(false);
                 //btnGetValues.setDisable(false);
 
 
@@ -162,6 +184,22 @@ public class Controller implements Initializable {
 
             }
         }));
+
+        btnGenerate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (cbCompanies.getSelectionModel().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please select a company.");
+                } else {
+                    dbCompany.booleanFindCompany(cbCompanies.getSelectionModel().getSelectedItem());
+                    int min = 1;
+                    int max = listOfCompanies.size();
+                    int id = min + (int) (Math.random() * ((max - min) + 1));
+                    testLabel.setText((id + ""));
+                }
+
+            }
+        });
 
 
     }

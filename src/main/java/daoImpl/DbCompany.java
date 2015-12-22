@@ -12,6 +12,7 @@ import java.util.List;
 //import javafx.scene.control.Alert;
 //import others.MyAlerts;
 
+
 /**
  * Created by odin on 15.04.15.
  */
@@ -124,8 +125,8 @@ public class DbCompany implements DbDao {
 
             return true;
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            //entityManager.getTransaction().rollback();
+            //System.out.println(ex.getMessage());
+            entityManager.getTransaction().rollback();
             return false;
         }
     }
@@ -140,8 +141,8 @@ public class DbCompany implements DbDao {
             query.executeUpdate();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            //entityManager.getTransaction().rollback();
+            //System.out.println(ex.getMessage());
+            entityManager.getTransaction().rollback();
             return false;
         }
     }

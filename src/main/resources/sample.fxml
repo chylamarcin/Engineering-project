@@ -9,20 +9,23 @@
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <ComboBox fx:id="cbFilter" layoutX="14.0" layoutY="14.0" prefWidth="150.0"/>
-                <ComboBox fx:id="cbCompanies" layoutX="14.0" layoutY="48.0" prefWidth="150.0"/>
-                <Button fx:id="btnGetValues" layoutX="14.0" layoutY="146.0" mnemonicParsing="false" text="Get values"/>
-                <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="337.0" prefWidth="200.0" progress="0.0"/>
-                <Button fx:id="btnGetComapnies" layoutX="98.0" layoutY="146.0" mnemonicParsing="false"
+                <ComboBox fx:id="cbFilter" layoutX="69.0" layoutY="14.0" prefWidth="150.0"/>
+                <ComboBox fx:id="cbCompanies" layoutX="69.0" layoutY="49.0" prefWidth="150.0"/>
+                <Button fx:id="btnGetValues" layoutX="24.0" layoutY="201.0" mnemonicParsing="false" text="Get values"/>
+                <Button fx:id="btnGetComapnies" layoutX="117.0" layoutY="201.0" mnemonicParsing="false"
                         text="Get companies"/>
-                <TableView fx:id="tableView" layoutX="23.0" layoutY="188.0" prefHeight="119.0" prefWidth="390.0">
+                <TableView fx:id="tableView" layoutX="24.0" layoutY="235.0" prefHeight="119.0" prefWidth="390.0">
                     <columns>
                         <TableColumn fx:id="colDate" prefWidth="75.0" text="Date"/>
                         <TableColumn fx:id="colValue" prefWidth="75.0" text="Value"/>
                         <TableColumn fx:id="colPredictValue" prefWidth="102.0" text="Predicted Value"/>
                     </columns>
                 </TableView>
-                <Button fx:id="buttonLoad" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" text="Load"/>
+                <Button fx:id="buttonLoad" layoutX="240.0" layoutY="14.0" mnemonicParsing="false" text="Load"/>
+                <Label layoutX="13.0" layoutY="18.0" prefHeight="17.0" prefWidth="48.0" text="Sort:"/>
+                <Label layoutX="10.0" layoutY="53.0" text="Company"/>
+                <Label fx:id="testLabel" layoutX="374.0" layoutY="70.0" text="Test label"/>
+                <Button fx:id="btnGenerate" layoutX="240.0" layoutY="49.0" mnemonicParsing="false" text="Generate"/>
             </children>
         </AnchorPane>
     </center>
