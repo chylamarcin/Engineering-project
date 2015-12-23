@@ -207,9 +207,10 @@ public class Controller implements Initializable {
 
                     for (int i = 0; i < d.length; i++) {
                         for (int j = 0; j < d[i].length; j++) {
-                            System.out.print(d[i][j] + " | ");
+                            //System.out.printf("%.04f",d[i][j]);
+                            //System.out.print(" | ");
                         }
-                        System.out.println();
+                        //System.out.println();
                     }
 
                     //int id = min + (int) (Math.random() * ((max - min) + 1));

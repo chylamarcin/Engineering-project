@@ -81,7 +81,7 @@ public class Network {
                 if (helpV2.contains(" ")) {
                     helpV2.replace(" ", "");
                 }
-                listOfValues.add(Double.parseDouble(helpV2));
+                listOfValues2.add(Double.parseDouble(helpV2));
             }
 
             for (int i = 0; i < listOfExchange3.size(); i++) {
@@ -89,7 +89,7 @@ public class Network {
                 if (helpV2.contains(" ")) {
                     helpV2.replace(" ", "");
                 }
-                listOfValues.add(Double.parseDouble(helpV2));
+                listOfValues3.add(Double.parseDouble(helpV2));
             }
 
             for (int i = 0; i < listOfExchange4.size(); i++) {
@@ -97,31 +97,32 @@ public class Network {
                 if (helpV2.contains(" ")) {
                     helpV2.replace(" ", "");
                 }
-                listOfValues.add(Double.parseDouble(helpV2));
+                listOfValues4.add(Double.parseDouble(helpV2));
             }
 
             listOfListOfValues.add(listOfValues);
             listOfListOfValues.add(listOfValues2);
             listOfListOfValues.add(listOfValues3);
             listOfListOfValues.add(listOfValues4);
-            double dividor;
 
-            int k = 0;
+            dividors[0] = Collections.max(listOfValues);
+            dividors[1] = Collections.max(listOfValues2);
+            dividors[2] = Collections.max(listOfValues3);
+            dividors[3] = Collections.max(listOfValues4);
+
             tableOfValues = new double[4][listOfValues.size()];
-            for (int i = listOfValues.size() - 5; i < listOfValues.size(); i++) {
-                dividor = Collections.max(listOfListOfValues.get(k));
+            for (int i = 0; i < listOfValues.size(); i++) {
                 for (int j = 0; j < listOfListOfValues.size(); j++) {
-                    tableOfValues[j][i] = listOfListOfValues.get(j).get(i) / dividor;
-                }
-                if (k < 3) {
-                    dividors[k] = dividor;
-                    k++;
+                    tableOfValues[j][i] = listOfListOfValues.get(j).get(i) / dividors[j];
+                    System.out.println(i);
                 }
             }
 
         } catch (Exception e) {
             //System.err.println(e.getMessage());
             e.printStackTrace();
+            System.err.print("ERROR: <-----------<<" + e.getMessage());
+            System.out.println();
         }
 
 
@@ -143,6 +144,14 @@ public class Network {
         double[] preparedTable = {selectedCompany[selectedCompany.length - maxDay], randomCompany1[randomCompany1.length - maxDay],
                 randomCompany3[randomCompany3.length - maxDay], randomCompany4[randomCompany4.length - maxDay]};
 
+        return preparedTable;
+    }
+
+    public double[][] prepare2dTable(double[][] tbToPrp) {
+        double preparedTable[][] = {{tbToPrp[0][tbToPrp.length - 4], tbToPrp[0][tbToPrp.length - 3], tbToPrp[0][tbToPrp.length - 2], tbToPrp[0][tbToPrp.length - 1]},
+                {tbToPrp[1][tbToPrp.length - 4], tbToPrp[1][tbToPrp.length - 3], tbToPrp[1][tbToPrp.length - 2], tbToPrp[1][tbToPrp.length - 1]},
+                {tbToPrp[2][tbToPrp.length - 4], tbToPrp[2][tbToPrp.length - 3], tbToPrp[2][tbToPrp.length - 2], tbToPrp[2][tbToPrp.length - 1]},
+                {tbToPrp[3][tbToPrp.length - 4], tbToPrp[3][tbToPrp.length - 3], tbToPrp[3][tbToPrp.length - 2], tbToPrp[3][tbToPrp.length - 1]}};
         return preparedTable;
     }
 
