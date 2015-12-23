@@ -26,6 +26,7 @@
                 <Label layoutX="10.0" layoutY="53.0" text="Company"/>
                 <Label fx:id="testLabel" layoutX="374.0" layoutY="70.0" text="Test label"/>
                 <Button fx:id="btnGenerate" layoutX="240.0" layoutY="49.0" mnemonicParsing="false" text="Generate"/>
+                <Button fx:id="btnPropagation" layoutX="348.0" layoutY="14.0" mnemonicParsing="false" text="Answer"/>
             </children>
         </AnchorPane>
     </center>

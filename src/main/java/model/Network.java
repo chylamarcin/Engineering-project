@@ -60,10 +60,12 @@ public class Network {
         List<Double> listOfValues3 = new ArrayList<>();
         List<Double> listOfValues4 = new ArrayList<>();
         List<List<Double>> listOfListOfValues = new ArrayList<List<Double>>(4);
+
         List<CompanyExchange> listOfExchange = company.getListOfExchanges();
         List<CompanyExchange> listOfExchange2 = rndCompany.getListOfExchanges();
         List<CompanyExchange> listOfExchange3 = rnd2Company.getListOfExchanges();
         List<CompanyExchange> listOfExchange4 = rnd3Company.getListOfExchanges();
+
         double[][] tableOfValues = new double[4][];
 
         String helpV2 = "";
@@ -71,7 +73,7 @@ public class Network {
             for (int i = 0; i < listOfExchange.size(); i++) {
                 helpV2 = listOfExchange.get(i).getValue().replace(",", ".");
                 if (helpV2.contains(" ")) {
-                    helpV2.replace(" ", "");
+                    helpV2 = helpV2.replace(" ", "");
                 }
                 listOfValues.add(Double.parseDouble(helpV2));
             }
@@ -79,7 +81,7 @@ public class Network {
             for (int i = 0; i < listOfExchange2.size(); i++) {
                 helpV2 = listOfExchange2.get(i).getValue().replace(",", ".");
                 if (helpV2.contains(" ")) {
-                    helpV2.replace(" ", "");
+                    helpV2 = helpV2.replace(" ", "");
                 }
                 listOfValues2.add(Double.parseDouble(helpV2));
             }
@@ -87,7 +89,7 @@ public class Network {
             for (int i = 0; i < listOfExchange3.size(); i++) {
                 helpV2 = listOfExchange3.get(i).getValue().replace(",", ".");
                 if (helpV2.contains(" ")) {
-                    helpV2.replace(" ", "");
+                    helpV2 = helpV2.replace(" ", "");
                 }
                 listOfValues3.add(Double.parseDouble(helpV2));
             }
@@ -95,7 +97,7 @@ public class Network {
             for (int i = 0; i < listOfExchange4.size(); i++) {
                 helpV2 = listOfExchange4.get(i).getValue().replace(",", ".");
                 if (helpV2.contains(" ")) {
-                    helpV2.replace(" ", "");
+                    helpV2 = helpV2.replace(" ", "");
                 }
                 listOfValues4.add(Double.parseDouble(helpV2));
             }
@@ -114,7 +116,7 @@ public class Network {
             for (int i = 0; i < listOfValues.size(); i++) {
                 for (int j = 0; j < listOfListOfValues.size(); j++) {
                     tableOfValues[j][i] = listOfListOfValues.get(j).get(i) / dividors[j];
-                    System.out.println(i);
+                    //System.out.println(i);
                 }
             }
 
@@ -124,7 +126,6 @@ public class Network {
             System.err.print("ERROR: <-----------<<" + e.getMessage());
             System.out.println();
         }
-
 
         return tableOfValues;
 
@@ -139,31 +140,49 @@ public class Network {
     }
 
     //TODO set it up to change result table[4][X] from companyNormalize to [4][5]
-    public double[] prepareTables(double[] selectedCompany, double[] randomCompany1, double[] randomCompany2,
-                                  double[] randomCompany3, double[] randomCompany4, int maxDay) {
-        double[] preparedTable = {selectedCompany[selectedCompany.length - maxDay], randomCompany1[randomCompany1.length - maxDay],
-                randomCompany3[randomCompany3.length - maxDay], randomCompany4[randomCompany4.length - maxDay]};
+    public double[] prepareTables1d(double[][] tbToPrp1d) {
+        double[] preparedTable = {tbToPrp1d[0][tbToPrp1d[0].length - 1], tbToPrp1d[1][tbToPrp1d[1].length - 1],
+                tbToPrp1d[2][tbToPrp1d[2].length - 1], tbToPrp1d[3][tbToPrp1d[3].length - 1]};
 
         return preparedTable;
     }
 
     public double[][] prepare2dTable(double[][] tbToPrp) {
-        double preparedTable[][] = {{tbToPrp[0][tbToPrp.length - 4], tbToPrp[0][tbToPrp.length - 3], tbToPrp[0][tbToPrp.length - 2], tbToPrp[0][tbToPrp.length - 1]},
-                {tbToPrp[1][tbToPrp.length - 4], tbToPrp[1][tbToPrp.length - 3], tbToPrp[1][tbToPrp.length - 2], tbToPrp[1][tbToPrp.length - 1]},
-                {tbToPrp[2][tbToPrp.length - 4], tbToPrp[2][tbToPrp.length - 3], tbToPrp[2][tbToPrp.length - 2], tbToPrp[2][tbToPrp.length - 1]},
-                {tbToPrp[3][tbToPrp.length - 4], tbToPrp[3][tbToPrp.length - 3], tbToPrp[3][tbToPrp.length - 2], tbToPrp[3][tbToPrp.length - 1]}};
+        double preparedTable[][] = {{tbToPrp[0][tbToPrp[0].length - 5], tbToPrp[0][tbToPrp[0].length - 4], tbToPrp[0][tbToPrp[0].length - 3], tbToPrp[0][tbToPrp[0].length - 2]},
+                {tbToPrp[1][tbToPrp[1].length - 5], tbToPrp[1][tbToPrp[1].length - 4], tbToPrp[1][tbToPrp[1].length - 3], tbToPrp[1][tbToPrp[1].length - 2]},
+                {tbToPrp[2][tbToPrp[2].length - 5], tbToPrp[2][tbToPrp[2].length - 4], tbToPrp[2][tbToPrp[2].length - 3], tbToPrp[2][tbToPrp[2].length - 2]},
+                {tbToPrp[3][tbToPrp[3].length - 5], tbToPrp[3][tbToPrp[3].length - 4], tbToPrp[3][tbToPrp[3].length - 3], tbToPrp[3][tbToPrp[3].length - 2]}};
+
         return preparedTable;
     }
 
-    public double prepareIdealOutput(double[] selectedCompany, int day) {
-        if (selectedCompany.length - day + 1 > selectedCompany.length) {
-            return 0; // NARAZIE ZERO POTEM SIE POMYSLI
-        } else {
-            return selectedCompany[selectedCompany.length - day + 1];
-        }
+    public double[][] prepare2dTbToPrpg(double[][] tbToPrp) {
+        double preparedTable[][] = {{tbToPrp[0][tbToPrp[0].length - 4], tbToPrp[0][tbToPrp[0].length - 3], tbToPrp[0][tbToPrp[0].length - 2], tbToPrp[0][tbToPrp[0].length - 1]},
+                {tbToPrp[1][tbToPrp[1].length - 4], tbToPrp[1][tbToPrp[1].length - 3], tbToPrp[1][tbToPrp[1].length - 2], tbToPrp[1][tbToPrp[1].length - 1]},
+                {tbToPrp[2][tbToPrp[2].length - 4], tbToPrp[2][tbToPrp[2].length - 3], tbToPrp[2][tbToPrp[2].length - 2], tbToPrp[2][tbToPrp[2].length - 1]},
+                {tbToPrp[3][tbToPrp[3].length - 4], tbToPrp[3][tbToPrp[3].length - 3], tbToPrp[3][tbToPrp[3].length - 2], tbToPrp[3][tbToPrp[3].length - 1]}};
+
+        return preparedTable;
     }
 
-    public void createAndTrainNetwork(double[][] input, double[][] ideal) {
+//    public double prepareIdealOutput(double[] selectedCompany, int day) {
+//        if (selectedCompany.length - day + 1 > selectedCompany.length) {
+//            return 0; // NARAZIE ZERO POTEM SIE POMYSLI
+//        } else {
+//            return selectedCompany[selectedCompany.length - day + 1];
+//        }
+//    }
+
+    public double[][] prepareIdealOutput(double[][] tbToPrp) {
+        System.out.println(tbToPrp[0][tbToPrp.length]);
+        double preparedTable[][] = {{tbToPrp[0][tbToPrp[0].length - 1]},
+                {tbToPrp[0][tbToPrp[0].length - 1]},
+                {tbToPrp[0][tbToPrp[0].length - 1]},
+                {tbToPrp[0][tbToPrp[0].length - 1]}};
+        return preparedTable;
+    }
+
+    public void createAndTrainNetwork(double[][] input, double[][] ideal, String companyName) {
         BasicNetwork network2 = new BasicNetwork();
         network2.addLayer(new BasicLayer(null, true, 4));
         network2.addLayer(new BasicLayer(new ActivationSigmoid(), true, 8));
@@ -172,14 +191,17 @@ public class Network {
         network2.getStructure().finalizeStructure();
         network2.reset();
 
+
         MLDataSet trainingSet = new BasicMLDataSet(input, ideal);
 
         // test the neural network
         System.out.println("Neural Network Results:");
 
-        double[] helpArray = {14.50, 16.95, 20.90, 5.10};
+        double[] helpArray = dividors;
         double[] error = new double[4];
         int z = 0;
+
+        double[] newNetworkError = trainNewNetwork(network2, trainingSet);
 
         for (MLDataPair pair : trainingSet) {
             final MLData output = network2.compute(pair.getInput());
@@ -195,26 +217,15 @@ public class Network {
         if (response == JOptionPane.NO_OPTION) {
             System.out.println("No button clicked");
         } else if (response == JOptionPane.YES_OPTION) {
-            EncogDirectoryPersistence.saveObject(new File("network.eg"), network2);
+            EncogDirectoryPersistence.saveObject(new File(companyName + " network.eg"), network2);
         } else if (response == JOptionPane.CLOSED_OPTION) {
             System.out.println("JOptionPane closed");
         }
         Encog.getInstance().shutdown();
 
-        for (int i = 0; i < 10; i++) {
 
-            network2 = new BasicNetwork();
-            network2.addLayer(new BasicLayer(null, true, 4));
-            network2.addLayer(new BasicLayer(new ActivationSigmoid(), true, 8));
-            network2.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
+        //loadAndEvaluate(trainingSet, helpArray, newNetworkError, network2);
 
-            network2.getStructure().finalizeStructure();
-            network2.reset();
-
-            double[] newNetworkError = trainNewNetwork(network2, trainingSet);
-            loadAndEvaluate(trainingSet, helpArray, newNetworkError, network2);
-            System.out.println("Jeszcze tylko " + (10000000 - i + 1));
-        }
     }
 
     public static double[] trainNewNetwork(BasicNetwork newNetwork, MLDataSet trainingSet) {
@@ -222,70 +233,53 @@ public class Network {
         final ResilientPropagation train = new ResilientPropagation(newNetwork, trainingSet);
 
         int epoch = 1;
-        double epochError = 0.0000009;
         OutputErrorFunction outputErrorFunction = new OutputErrorFunction();
 
         do {
             train.iteration();
-            //System.out.println("Epoch #" + epoch + " Error: " + train.getError());
+            System.out.println("Epoch: " + epoch + " Error: "
+                    + train.getError());
             epoch++;
-            if (epoch > 200000) {
-                break;
-            }
-        } while (train.getError() > epochError);
+        } while (train.getError() > 0.0001);
 
-        double[] helpArray = {14.50, 16.95, 20.90, 5.10};
         double[] error = new double[4];
         int z = 0;
         double[] newNetworkError = new double[4];
-        for (MLDataPair pair : trainingSet) {
-            final MLData output = newNetwork.compute(pair.getInput());
-            //final MLData output = network.compute(mlData);
-            System.out.printf("Yesterday " + String.format(String.format("%.04f", pair.getInput().getData(3) * helpArray[z]) +
-                    " predicted = " + String.format("%.04f", output.getData(0) * helpArray[z]) +
-                    " correct = " + String.format("%.04f", pair.getIdeal().getData(0) * helpArray[z]) + " difference = " + String.format("%.04f", (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z])) + "\n"));
-            newNetworkError[z] = (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z]);
-            z++;
-        }
-
         return newNetworkError;
     }
 
-    public static void loadAndEvaluate(MLDataSet trainingSet, double[] helpArray, double[] newNetworkError, BasicNetwork newNetwork) {
+    public BasicNetwork loadEgsistingNetwork(String companyName) {
+        BasicNetwork network = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(companyName + " network.eg"));
+        return network;
+    }
+
+    public void loadAndEvaluate(MLData trainingSet, String companyName) {
         int z = 0;
         int j = 0;
-        System.out.println("Loading network");
-        BasicNetwork network = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File("network.eg"));
 
-        double e = network.calculateError(trainingSet);
-        System.out.println();
-        double[] oldNetworkError = new double[4];
-        System.out.println("----------------old one--------------------");
-        for (MLDataPair pair : trainingSet) {
-            final MLData output = network.compute(pair.getInput());
-            //final MLData output = network.compute(mlData);
-            System.out.printf("Yesterday " + String.format(String.format("%.04f", pair.getInput().getData(3) * helpArray[z]) +
-                    " predicted = " + String.format("%.04f", output.getData(0) * helpArray[z]) +
-                    " correct = " + String.format("%.04f", pair.getIdeal().getData(0) * helpArray[z]) + " difference = " + String.format("%.04f", (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z])) + "\n"));
-            oldNetworkError[z] = (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z]);
-            z++;
+        BasicNetwork network = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(companyName + " network.eg"));
+        // double e = network.calculateError(trainingSet);
+//        double[] oldNetworkError = new double[4];
+//
+//        for (int i = 0; i < newNetworkError.length; i++) {
+//            if (Math.abs(roundOff(oldNetworkError[i], 3)) >= Math.abs(roundOff(newNetworkError[i], 3))) {
+//                j++;
+//            }
+//        }
 
-        }
+        MLData output = network.compute(trainingSet);
+        double value = output.getData(0);
+        System.out.println(value * dividors[0] + " to ta wartosc test test test");
+//        double[] helpArray = dividors;
+//        for (MLDataPair pair : trainingSet) {
+//            final MLData output = network.compute(pair.getInput());
+//            //final MLData output = network.compute(mlData);
+//            System.out.printf("Yesterday " + String.format(String.format("%.04f", pair.getInput().getData(3) * helpArray[z]) +
+//                    " predicted = " + String.format("%.04f", output.getData(0) * helpArray[z]) +
+//                    " correct = " + String.format("%.04f", pair.getIdeal().getData(0) * helpArray[z]) + " difference = " + String.format("%.04f", (output.getData(0) * helpArray[z] - pair.getIdeal().getData(0) * helpArray[z])) + "\n"));
+//            z++;
+//        }
 
-        for (int i = 0; i < newNetworkError.length; i++) {
-            if (Math.abs(roundOff(oldNetworkError[i], 3)) >= Math.abs(roundOff(newNetworkError[i], 3))) {
-                j++;
-            }
-        }
-
-        System.err.println("Lepsze wyniki " + j);
-
-        if (j >= 4) {
-            EncogDirectoryPersistence.saveObject(new File("network.eg"), newNetwork);
-            JOptionPane.showMessageDialog(null, "New network saved");
-        } else {
-            System.out.println("No better network here!");
-        }
     }
 
     static double roundOff(double x, int position) {

@@ -13,6 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Company;
 import model.CompanyExchange;
 import model.Network;
+import org.encog.ml.data.MLData;
+import org.encog.ml.data.basic.BasicMLData;
 import org.joda.time.DateTime;
 import others.Parser;
 
@@ -43,6 +45,9 @@ public class Controller implements Initializable {
 
     @FXML
     private Button btnGetComapnies;
+
+    @FXML
+    private Button btnPropagation;
 
     @FXML
     private Label testLabel;
@@ -203,24 +208,49 @@ public class Controller implements Initializable {
 
                     Network network = new Network();
                     network.dividors = new double[4];
-                    double[][] d = network.companyNormalize(company, company2, company3, company4);
+                    double[][] dataSet = network.companyNormalize(company, company2, company3, company4);
+                    double[][] preparedTable = network.prepare2dTable(dataSet);
+                    double[][] preparedOutput = network.prepareIdealOutput(dataSet);
 
-                    for (int i = 0; i < d.length; i++) {
-                        for (int j = 0; j < d[i].length; j++) {
-                            //System.out.printf("%.04f",d[i][j]);
-                            //System.out.print(" | ");
-                        }
-                        //System.out.println();
-                    }
 
-                    //int id = min + (int) (Math.random() * ((max - min) + 1));
-                    //int id2 = min + (int) (Math.random() * ((max - min) + 1));
+                    network.createAndTrainNetwork(preparedTable, preparedOutput, company.getCompanyName());
+
+//                    for (int i = 0; i < preparedTable.length; i++) {
+//                        for (int j = 0; j < preparedTable[i].length; j++) {
+//                            System.out.printf("%.04f", preparedTable[i][j]*network.dividors[i]);
+//                            System.out.print(" | ");
+//                        }
+//                        System.out.println();
+//                    }
                 }
 
             }
         });
 
+        btnPropagation.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (cbCompanies.getSelectionModel().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please select a company.");
+                } else {
+                    Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
 
+                    int max = listOfCompanies.size();
+                    int[] companiesNumbers = new Random().ints(1, max).distinct().limit(3).toArray();
+                    Company company2 = listOfCompanies.get(companiesNumbers[0]);
+                    Company company3 = listOfCompanies.get(companiesNumbers[1]);
+                    Company company4 = listOfCompanies.get(companiesNumbers[2]);
+
+                    Network network = new Network();
+                    network.dividors = new double[4];
+                    double[][] dataSet = network.companyNormalize(company, company2, company3, company4);
+                    double[][] prepared2 = network.prepare2dTbToPrpg(dataSet);
+                    MLData prep1dTb = new BasicMLData(network.prepareTables1d(dataSet));
+                    network.loadAndEvaluate(prep1dTb, company.getCompanyName());
+
+
+                }
+            }
+        });
     }
-
 }
