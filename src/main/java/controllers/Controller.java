@@ -1,25 +1,27 @@
 package controllers;
 
 import daoImpl.DbCompany;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Company;
 import model.CompanyExchange;
 import model.Network;
+import model.PredictedExchange;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.basic.BasicMLData;
 import org.joda.time.DateTime;
 import others.Parser;
 
-import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +37,7 @@ public class Controller implements Initializable {
     private ComboBox<String> cbCompanies;
 
     @FXML
-    private Button btnGenerate;
+    public Button btnGenerate;
 
     @FXML
     private Button btnGetValues;
@@ -53,31 +55,46 @@ public class Controller implements Initializable {
     private Label testLabel;
 
     @FXML
-    public static ProgressBar progressBar;
-
-    @FXML
     private TableColumn<CompanyExchange, String> colValue;
 
     @FXML
     private TableColumn<CompanyExchange, String> colDate;
 
     @FXML
-    private TableView<CompanyExchange> tableView; //to jest ta? nie mam innej :v ok
+    private TableView<CompanyExchange> tableView;
+
+    @FXML
+    private TableView<PredictedExchange> tableViewPredict;
+
+    @FXML
+    private TableColumn<PredictedExchange, String> colPredictValue;
+
+    @FXML
+    private TableColumn<PredictedExchange, String> colPredictMean;
+
+    @FXML
+    private TableColumn<PredictedExchange, String> colPredictDate;
 
     private DbCompany dbCompany = new DbCompany();
 
     private List<Company> listOfCompanies = dbCompany.loadAllCompanies();
     private List<Company> listOfFilteredCompanies;
 
-    public void initialize(URL location, ResourceBundle resources) {
+    public Button getGenerateButton() {
+        return btnGenerate;
+    }
 
+    public void initialize(URL location, ResourceBundle resources) {
 
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colValue.setCellValueFactory(new PropertyValueFactory<>("value"));
 
-        progressBar = new ProgressBar();
+        colPredictDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colPredictValue.setCellValueFactory(new PropertyValueFactory<>("predictedValue"));
+        colPredictMean.setCellValueFactory(new PropertyValueFactory<>("predictedValueMean"));
 
         cbCompanies.setDisable(true);
+        btnPropagation.setDisable(true);
         btnGetComapnies.setVisible(true);
 
         for (char i = '0'; i <= '9'; i++) {
@@ -106,6 +123,16 @@ public class Controller implements Initializable {
             public void handle(ActionEvent event) {
                 Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
                 //System.out.println(company.getCompanyName());
+
+                if (cbCompanies.getItems().isEmpty()) {
+                    btnPropagation.setDisable(true);
+                } else {
+                    if (new File("./" + company.getCompanyName() + " network.eg").exists()) {
+                        btnPropagation.setDisable(false);
+                    } else {
+                        btnPropagation.setDisable(true);
+                    }
+                }
             }
         }));
 
@@ -124,12 +151,16 @@ public class Controller implements Initializable {
 
                 try {
                     List<Company> companToCheckDate = dbCompany.loadAllCompanies();
-                    List<CompanyExchange> exchangeToCheckDate = companToCheckDate.get(companToCheckDate.size() - 1).getListOfExchanges();
+                    List<CompanyExchange> exchangeToCheckDate = companToCheckDate.get(
+                            companToCheckDate.size() - 1).getListOfExchanges();
                     Date lastDate = exchangeToCheckDate.get(exchangeToCheckDate.size() - 1).getDate();
                     lastJDate = new DateTime(lastDate);
                     currentJDate = new DateTime(new Date());
                     if (currentJDate.toLocalDate().compareTo(lastJDate.toLocalDate()) == 0) {
-                        JOptionPane.showMessageDialog(null, "Values are up to date!");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("Checking value");
+                        alert.setContentText("Values are up to date!");
+                        alert.showAndWait();
                     } else {
                         Parser.getValues();
                     }
@@ -156,7 +187,10 @@ public class Controller implements Initializable {
                             Parser.getCompanies();
                             btnGetComapnies.setDisable(true);
                         } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, e.getMessage());
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setHeaderText("Error!");
+                            alert.setContentText(e.getMessage());
+                            alert.showAndWait();
                         }
                     }
                 });
@@ -172,11 +206,20 @@ public class Controller implements Initializable {
             public void handle(ActionEvent event) {
 
                 if (cbCompanies.getSelectionModel().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please select a company.");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Error!");
+                    alert.setContentText("Please select a company.");
+                    alert.showAndWait();
                 } else {
                     Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
                     ObservableList<CompanyExchange> c = company.getObsList();
                     tableView.setItems(c);
+
+                    ObservableList<PredictedExchange> pe = FXCollections.observableArrayList(
+                            dbCompany.findPredictedExchange(company.getId()));
+
+                    tableViewPredict.setItems(pe);
+
                 }
 
 
@@ -196,7 +239,10 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 if (cbCompanies.getSelectionModel().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please select a company.");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Error!");
+                    alert.setContentText("Please select a company.");
+                    alert.showAndWait();
                 } else {
                     Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
 
@@ -211,10 +257,12 @@ public class Controller implements Initializable {
                     double[][] dataSet = network.companyNormalize(company, company2, company3, company4);
                     double[][] preparedTable = network.prepare2dTable(dataSet);
                     double[][] preparedOutput = network.prepareIdealOutput(dataSet);
+                    try {
 
-
-                    network.createAndTrainNetwork(preparedTable, preparedOutput, company.getCompanyName());
-
+                        network.createAndTrainNetwork(preparedTable, preparedOutput, company.getCompanyName());
+                    } catch (Exception e) {
+                        System.err.println("problem z generowaniem");
+                    }
 //                    for (int i = 0; i < preparedTable.length; i++) {
 //                        for (int j = 0; j < preparedTable[i].length; j++) {
 //                            System.out.printf("%.04f", preparedTable[i][j]*network.dividors[i]);
@@ -231,7 +279,10 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 if (cbCompanies.getSelectionModel().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please select a company.");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Error!");
+                    alert.setContentText("Please select a company.");
+                    alert.showAndWait();
                 } else {
                     Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
 
@@ -243,14 +294,18 @@ public class Controller implements Initializable {
 
                     Network network = new Network();
                     network.dividors = new double[4];
-                    double[][] dataSet = network.companyNormalize(company, company2, company3, company4);
-                    double[][] prepared2 = network.prepare2dTbToPrpg(dataSet);
-                    MLData prep1dTb = new BasicMLData(network.prepareTables1d(dataSet));
-                    network.loadAndEvaluate(prep1dTb, company.getCompanyName());
-
+                    try {
+                        double[][] dataSet = network.companyNormalize(company, company2, company3, company4);
+                        double[][] prepared2 = network.prepare2dTbToPrpg(dataSet);
+                        MLData prep1dTb = new BasicMLData(network.prepareTables1d(dataSet));
+                        network.loadAndEvaluate(prep1dTb, company);
+                    } catch (Exception e) {
+                        System.err.println("problem z answerem");
+                    }
 
                 }
             }
         });
+
     }
 }

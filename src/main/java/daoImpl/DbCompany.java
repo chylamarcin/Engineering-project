@@ -1,8 +1,10 @@
 package daoImpl;
 
 import dao.DbDao;
+import javafx.scene.control.Alert;
 import model.Company;
 import model.CompanyExchange;
+import model.PredictedExchange;
 import others.Parser;
 
 import javax.persistence.Query;
@@ -23,14 +25,15 @@ public class DbCompany implements DbDao {
             if (!entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().begin();
             }
-
             entityManager.persist(company);
             entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            //MyAlerts.showAlert("Error!", "Can't save company!", Alert.AlertType.ERROR, "Error!");
             entityManager.getTransaction().rollback();
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("Can't save company " + e.getMessage());
+            alert.showAndWait();
             return false;
         }
 
@@ -46,11 +49,36 @@ public class DbCompany implements DbDao {
             entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            //MyAlerts.showAlert("Error!", "Can't save company!", Alert.AlertType.ERROR, "Error!");
+            if (entityManager.getTransaction() != null) {
+                entityManager.getTransaction().rollback();
+            }
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("Can't save exchange" + e.getMessage());
+            alert.showAndWait();
+            return false;
+        }
+
+    }
+
+    public boolean savePredictedCompanyExchange(PredictedExchange predictedExchange) {
+        try {
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
+            }
+
+            entityManager.persist(predictedExchange);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
             if (entityManager.getTransaction() != null) {
                 entityManager.getTransaction().rollback();
             }
             e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("Can't save predicted exchange " + e.getMessage());
+            alert.showAndWait();
             return false;
         }
 
@@ -61,17 +89,17 @@ public class DbCompany implements DbDao {
             if (!entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().begin();
             }
-
             entityManager.merge(company);
             entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            //MyAlerts.showAlert("Error!", "Can't save company!", Alert.AlertType.ERROR, "Error!");
             entityManager.getTransaction().rollback();
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("Can't update company " + e.getMessage());
+            alert.showAndWait();
             return false;
         }
-
     }
 
     public Company findCompany(String companyName) {
@@ -110,23 +138,38 @@ public class DbCompany implements DbDao {
         }
     }
 
-
-    public boolean deleteAssociationsById(Long id) {
-
+    public List<PredictedExchange> findPredictedExchange(Long companyId) {
+        List<PredictedExchange> predictedExchanges = null;
         try {
             if (!entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().begin();
             }
-            Query query = entityManager.createNativeQuery("delete from companyExchange where companyId = ?1");
+            TypedQuery<PredictedExchange> typedQuery = entityManager.createQuery(
+                    "select u from PredictedExchange u where u.company.id = :companyId", PredictedExchange.class);
+            typedQuery.setParameter("companyId", companyId);
+            entityManager.getTransaction().commit();
+            return predictedExchanges = typedQuery.getResultList();
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    public boolean deleteAssociationsById(Long id) {
+        try {
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
+            }
+            Query query = entityManager.createNativeQuery("DELETE FROM companyExchange WHERE companyId = ?1");
             query.setParameter(1, id);
             query.executeUpdate();
-
-            //deteleteCompanyById(id);
-
             return true;
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
             entityManager.getTransaction().rollback();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("Can't delete company " + ex.getMessage());
+            alert.showAndWait();
             return false;
         }
     }
@@ -141,8 +184,11 @@ public class DbCompany implements DbDao {
             query.executeUpdate();
             return true;
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
             entityManager.getTransaction().rollback();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("Can't update company " + ex.getMessage());
+            alert.showAndWait();
             return false;
         }
     }

@@ -6,14 +6,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import others.Parser;
 
-import javax.swing.*;
-
 public class Main extends Application {
-
 
 
     /**
@@ -30,12 +28,22 @@ public class Main extends Application {
         DbCompany dbCompany = new DbCompany();
 
         if (Parser.getCountOfSiteCompany() == -1) {
-            JOptionPane.showMessageDialog(null, "Check your internet connection!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("Check your internet connection!");
+            alert.showAndWait();
+            System.exit(0);
         } else if (dbCompany.checkCompaniesCount()) {
-            JOptionPane.showMessageDialog(null, "Companies are up to date.");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Checking companies");
+            alert.setContentText("Companies are up to date!");
+            alert.showAndWait();
             primaryStage.show();
         } else {
-            JOptionPane.showMessageDialog(null, "Wait, program need to update companies database.");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Checking companies");
+            alert.setContentText("Wait, program need to update companies database.");
+            primaryStage.showAndWait();
             Parser.getCompanies();
             Parser.getValues();
             primaryStage.show();
@@ -45,6 +53,7 @@ public class Main extends Application {
         //close operation
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent event) {
+                //Platform.exit();
                 System.exit(0);
             }
         });

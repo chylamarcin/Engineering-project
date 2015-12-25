@@ -2,6 +2,7 @@ package others;
 
 import dao.DbDao;
 import daoImpl.DbCompany;
+import javafx.scene.control.Alert;
 import model.Company;
 import model.CompanyExchange;
 import org.joda.time.DateTime;
@@ -9,7 +10,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -158,7 +158,6 @@ public class Parser implements DbDao {
         listOfCompanyValues.remove(0);
         for (int i = 0; i < listOfCompanyValues.size(); ++i) {
 
-            System.out.println(i + " " + listOfCompany.get(i).getCompanyName() + " " + listOfCompanyValues.get(i));
             Company company = listOfCompany.get(i);
             CompanyExchange companyExchange = new CompanyExchange();
             companyExchange.setValue(listOfCompanyValues.get(i));
@@ -168,7 +167,10 @@ public class Parser implements DbDao {
             dbCompany.saveCompanyExchange(companyExchange);
 
         }
-        JOptionPane.showMessageDialog(null, "Done.");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Downloading company values");
+        alert.setContentText("Downloading complete.");
+        alert.showAndWait();
     }
 
 

@@ -21,6 +21,9 @@ public class PredictedExchange {
     @Column
     private String predictedValue;
 
+    @Column
+    private String predictedValueMean;
+
     @ManyToOne
     @JoinColumn(name = "companyId")
     private Company company;
@@ -55,5 +58,13 @@ public class PredictedExchange {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public String getPredictedValueMean() {
+        return predictedValueMean;
+    }
+
+    public void setPredictedValueMean(String predictedValueMean) {
+        this.predictedValueMean = predictedValueMean;
     }
 }

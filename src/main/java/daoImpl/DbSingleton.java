@@ -27,8 +27,6 @@ public final class DbSingleton {
         return instance;
     }
 
-
-
     public EntityManagerFactory getEntityManagerFactory() {
         return entityManagerFactory;
     }
