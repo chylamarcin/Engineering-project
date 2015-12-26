@@ -3,31 +3,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="303.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controllers.Controller">
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <ComboBox fx:id="cbFilter" layoutX="69.0" layoutY="14.0" prefWidth="150.0"/>
-                <ComboBox fx:id="cbCompanies" layoutX="69.0" layoutY="49.0" prefWidth="150.0"/>
-                <Button fx:id="btnGetValues" layoutX="24.0" layoutY="151.0" mnemonicParsing="false" text="Get values"/>
-                <Button fx:id="btnGetComapnies" layoutX="117.0" layoutY="151.0" mnemonicParsing="false"
+                <ComboBox fx:id="cbFilter" layoutX="209.0" layoutY="14.0" prefWidth="150.0"/>
+                <ComboBox fx:id="cbCompanies" layoutX="209.0" layoutY="49.0" prefWidth="150.0"/>
+                <Button fx:id="btnGetValues" layoutX="20.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0"
+                        prefWidth="96.0" text="Get values"/>
+                <Button fx:id="btnGetComapnies" layoutX="20.0" layoutY="49.0" mnemonicParsing="false" prefWidth="96.0"
                         text="Get companies"/>
-                <TableView fx:id="tableView" layoutX="20.0" layoutY="195.0" prefHeight="158.0" prefWidth="189.0">
+                <TableView fx:id="tableView" layoutX="55.0" layoutY="93.0" prefHeight="158.0" prefWidth="189.0">
                     <columns>
                         <TableColumn fx:id="colDate" prefWidth="75.0" text="Date"/>
                         <TableColumn fx:id="colValue" prefWidth="85.0" text="Value"/>
                     </columns>
                 </TableView>
-                <Button fx:id="buttonLoad" layoutX="240.0" layoutY="14.0" mnemonicParsing="false" text="Load"/>
-                <Label layoutX="13.0" layoutY="18.0" prefHeight="17.0" prefWidth="48.0" text="Sort:"/>
-                <Label layoutX="10.0" layoutY="53.0" text="Company"/>
-                <Label fx:id="testLabel" layoutX="374.0" layoutY="70.0" text="Test label"/>
-                <Button fx:id="btnGenerate" layoutX="240.0" layoutY="49.0" mnemonicParsing="false" text="Generate"/>
-                <Button fx:id="btnPropagation" layoutX="348.0" layoutY="14.0" mnemonicParsing="false" text="Answer"/>
-                <TableView fx:id="tableViewPredict" layoutX="219.0" layoutY="195.0" prefHeight="159.0"
-                           prefWidth="292.0">
+                <Button fx:id="buttonLoad" layoutX="380.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0"
+                        prefWidth="82.0" text="Load data"/>
+                <Label alignment="CENTER_RIGHT" layoutX="153.0" layoutY="18.0" prefHeight="17.0" prefWidth="48.0"
+                       text="Sort:"/>
+                <Label layoutX="150.0" layoutY="53.0" text="Company:"/>
+                <Button fx:id="btnGenerate" layoutX="380.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0"
+                        prefWidth="176.0" text="Generate network"/>
+                <Button fx:id="btnPropagation" layoutX="466.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0"
+                        prefWidth="89.0" text="Propagation"/>
+                <TableView fx:id="tableViewPredict" layoutX="254.0" layoutY="93.0" prefHeight="159.0" prefWidth="292.0">
                     <columns>
                         <TableColumn fx:id="colPredictValue" prefWidth="110.0" text="Predicted Value"/>
                         <TableColumn fx:id="colPredictMean" prefWidth="88.0" text="Predited Mean"/>
@@ -42,15 +45,10 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close"/>
+                        <MenuItem fx:id="menuClose" mnemonicParsing="false" text="Close"/>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete"/>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu fx:id="menuAbout" mnemonicParsing="false" text="Help">
                     <items>
                         <MenuItem mnemonicParsing="false" text="About"/>
                     </items>

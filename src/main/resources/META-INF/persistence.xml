@@ -7,16 +7,11 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <!--<property name="javax.persistence.jdbc.user" value="neuralnetwork"/>
-            <property name="javax.persistence.jdbc.password" value="atosek123"/>
-             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql.cba.pl/toast_cba_pl"/>-->
             <property name="javax.persistence.jdbc.user" value="marcin"/>
             <property name="javax.persistence.jdbc.password" value="marcin"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>
-            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-
             <property name="hibernate.connection.useUnicode" value="true" />
             <property name="hibernate.connection.characterEncoding"
                       value="UTF-8" />

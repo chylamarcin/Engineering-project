@@ -23,7 +23,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
-        primaryStage.setTitle("Backward Propagation");
+        primaryStage.setTitle("Backpropagation");
         primaryStage.setScene(new Scene(root));
         DbCompany dbCompany = new DbCompany();
 

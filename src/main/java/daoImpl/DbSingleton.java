@@ -46,7 +46,6 @@ public final class DbSingleton {
     public void closeConnetion() {
         entityManager.close();
         entityManagerFactory.close();
-
     }
 
 

@@ -20,7 +20,7 @@ public class ViewChanger {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                     pathToView));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setTitle(title);
@@ -37,7 +37,7 @@ public class ViewChanger {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                     pathToView));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setTitle(title);
@@ -54,7 +54,7 @@ public class ViewChanger {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                     pathToView));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setTitle(title);
@@ -71,7 +71,7 @@ public class ViewChanger {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                     pathToView));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setTitle(title);
@@ -88,7 +88,7 @@ public class ViewChanger {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                     pathToView));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.setTitle(title);

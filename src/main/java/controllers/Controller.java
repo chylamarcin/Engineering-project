@@ -8,19 +8,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Company;
 import model.CompanyExchange;
-import model.Network;
 import model.PredictedExchange;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.basic.BasicMLData;
 import org.joda.time.DateTime;
+import others.ExceptionAlert;
+import others.Network;
 import others.Parser;
 
-import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.Date;
@@ -111,7 +109,6 @@ public class Controller implements Initializable {
                 listOfFilteredCompanies = dbCompany.loadAllCompaniesOnLetter(cbFilter.getSelectionModel().getSelectedItem());
 
                 for (int i = 0; i < listOfFilteredCompanies.size(); i++) {
-
                     cbCompanies.getItems().add(listOfFilteredCompanies.get(i).getCompanyName());
                 }
 
@@ -122,7 +119,6 @@ public class Controller implements Initializable {
         cbCompanies.setOnAction((new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
-                //System.out.println(company.getCompanyName());
 
                 if (cbCompanies.getItems().isEmpty()) {
                     btnPropagation.setDisable(true);
@@ -139,9 +135,6 @@ public class Controller implements Initializable {
         btnGetValues.setOnAction((new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent event) {
-
-                //progressBar.setProgress(0);
-                //progressBar.setProgress(0.50);
 
                 DateTime lastJDate = null;
                 DateTime currentJDate = null;
@@ -165,39 +158,12 @@ public class Controller implements Initializable {
                         Parser.getValues();
                     }
                 } catch (Exception ArrayIndexOutOfBoundsException) {
-                    System.out.println("date problem");
+                    ExceptionAlert alert = new ExceptionAlert(ArrayIndexOutOfBoundsException);
                     Parser.getValues();
                 }
 
                 btnGetComapnies.setDisable(false);
                 btnGetValues.setDisable(false);
-
-
-            }
-        }));
-
-
-        //TODO check if it work in other thread so i can display values in table at the same time when getting new values
-        btnGetComapnies.setOnAction((new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-
-                EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        try {
-                            Parser.getCompanies();
-                            btnGetComapnies.setDisable(true);
-                        } catch (Exception e) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setHeaderText("Error!");
-                            alert.setContentText(e.getMessage());
-                            alert.showAndWait();
-                        }
-                    }
-                });
-
-                btnGetComapnies.setDisable(false);
-                //btnGetValues.setDisable(false);
-
 
             }
         }));
@@ -214,10 +180,8 @@ public class Controller implements Initializable {
                     Company company = dbCompany.findCompany(cbCompanies.getSelectionModel().getSelectedItem());
                     ObservableList<CompanyExchange> c = company.getObsList();
                     tableView.setItems(c);
-
                     ObservableList<PredictedExchange> pe = FXCollections.observableArrayList(
                             dbCompany.findPredictedExchange(company.getId()));
-
                     tableViewPredict.setItems(pe);
 
                 }
@@ -228,10 +192,7 @@ public class Controller implements Initializable {
 
         btnGetComapnies.setOnAction((new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-
                 Parser.getCompanies();
-
-
             }
         }));
 
@@ -254,22 +215,14 @@ public class Controller implements Initializable {
 
                     Network network = new Network();
                     network.dividors = new double[4];
-                    double[][] dataSet = network.companyNormalize(company, company2, company3, company4);
-                    double[][] preparedTable = network.prepare2dTable(dataSet);
-                    double[][] preparedOutput = network.prepareIdealOutput(dataSet);
                     try {
-
+                        double[][] dataSet = network.companyNormalize(company, company2, company3, company4);
+                        double[][] preparedTable = network.prepare2dTable(dataSet);
+                        double[][] preparedOutput = network.prepareIdealOutput(dataSet);
                         network.createAndTrainNetwork(preparedTable, preparedOutput, company.getCompanyName());
                     } catch (Exception e) {
-                        System.err.println("problem z generowaniem");
+                        ExceptionAlert alert = new ExceptionAlert(e);
                     }
-//                    for (int i = 0; i < preparedTable.length; i++) {
-//                        for (int j = 0; j < preparedTable[i].length; j++) {
-//                            System.out.printf("%.04f", preparedTable[i][j]*network.dividors[i]);
-//                            System.out.print(" | ");
-//                        }
-//                        System.out.println();
-//                    }
                 }
 
             }
@@ -298,9 +251,9 @@ public class Controller implements Initializable {
                         double[][] dataSet = network.companyNormalize(company, company2, company3, company4);
                         double[][] prepared2 = network.prepare2dTbToPrpg(dataSet);
                         MLData prep1dTb = new BasicMLData(network.prepareTables1d(dataSet));
-                        network.loadAndEvaluate(prep1dTb, company);
+                        network.loadAndCompute(prep1dTb, company);
                     } catch (Exception e) {
-                        System.err.println("problem z answerem");
+                        ExceptionAlert alert = new ExceptionAlert(e);
                     }
 
                 }

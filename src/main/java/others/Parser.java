@@ -73,7 +73,6 @@ public class Parser implements DbDao {
     public static void getCompanies() {
         DbCompany dbCompany = new DbCompany();
         //Download page source
-
         Document doc = getSiteDoc();
 
         LinkedList<String> listOfCompanyNames = new LinkedList<String>();
@@ -85,7 +84,6 @@ public class Parser implements DbDao {
         }
 
         for (int i = 1; i < listOfCompanyNames.size(); i++) {
-            //System.out.println(listOfCompanyNames.size());
             Boolean companyName = false;
             companyName = dbCompany.booleanFindCompany(listOfCompanyNames.get(i));
             if (companyName == false) {
@@ -93,16 +91,12 @@ public class Parser implements DbDao {
                 company.setCompanyName(listOfCompanyNames.get(i));
                 dbCompany.saveCompany(company);
             }
-
         }
-
         checkCompanies();
     }
 
     public static void checkCompanies() {
         DbCompany dbCompany = new DbCompany();
-        //Download page source
-        //System.out.println("start");
         Document doc = getSiteDoc();
 
         LinkedList<String> listOfSiteCompanyNames = new LinkedList<String>();
@@ -126,15 +120,11 @@ public class Parser implements DbDao {
                 bol = dbCompany.deleteAssociationsById(id);
                 bol = dbCompany.deteleteCompanyById(id);
                 if (bol == true) {
-                    System.out.println("Deleted " + listAlphaOfCompany.get(i).getCompanyName());
                     listAlphaOfCompany = dbCompany.loadAlphabetCompanies();
                     i = 0;
                 }
-
             }
-
         }
-
     }
 
 
@@ -148,7 +138,6 @@ public class Parser implements DbDao {
         Elements tabElementsCurse = doc.getElementsByClass("colKurs");
         Date date = new Date();
         DateTime currentJDate = new DateTime(new Date());
-
 
         for (int i = 0; i < tabElementsCurse.size(); i++) {
             String companyValue = tabElementsCurse.get(i).text();
