@@ -13,7 +13,6 @@ import others.Parser;
 
 public class Main extends Application {
 
-
     /**
      * Main method
      *
@@ -49,27 +48,17 @@ public class Main extends Application {
             primaryStage.show();
         }
 
-
         //close operation
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent event) {
-                //Platform.exit();
                 System.exit(0);
             }
         });
-
-
     }
 
     public static void main(String[] args) {
         launch(args);
-
-
     }
-
-    //Parser.getTitle();
-
-
 }
 
 

@@ -1,10 +1,10 @@
 package daoImpl;
 
 import dao.DbDao;
-import javafx.scene.control.Alert;
 import model.Company;
 import model.CompanyExchange;
 import model.PredictedExchange;
+import others.ExceptionAlert;
 import others.Parser;
 
 import javax.persistence.Query;
@@ -20,6 +20,12 @@ import java.util.List;
  */
 public class DbCompany implements DbDao {
 
+    /**
+     * Method to save company in database.
+     *
+     * @param company
+     * @return True if company was added and false if not.
+     */
     public boolean saveCompany(Company company) {
         try {
             if (!entityManager.getTransaction().isActive()) {
@@ -30,10 +36,7 @@ public class DbCompany implements DbDao {
             return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("Can't save company " + e.getMessage());
-            alert.showAndWait();
+            ExceptionAlert alert = new ExceptionAlert("Can't save company", e);
             return false;
         }
 
@@ -52,10 +55,7 @@ public class DbCompany implements DbDao {
             if (entityManager.getTransaction() != null) {
                 entityManager.getTransaction().rollback();
             }
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("Can't save exchange" + e.getMessage());
-            alert.showAndWait();
+            ExceptionAlert alert = new ExceptionAlert("Can't save company exchange", e);
             return false;
         }
 
@@ -74,11 +74,7 @@ public class DbCompany implements DbDao {
             if (entityManager.getTransaction() != null) {
                 entityManager.getTransaction().rollback();
             }
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("Can't save predicted exchange " + e.getMessage());
-            alert.showAndWait();
+            ExceptionAlert alert = new ExceptionAlert("Can't save predicted exchange", e);
             return false;
         }
 
@@ -94,10 +90,7 @@ public class DbCompany implements DbDao {
             return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("Can't update company " + e.getMessage());
-            alert.showAndWait();
+            ExceptionAlert alert = new ExceptionAlert("Can't update exchange", e);
             return false;
         }
     }
@@ -116,6 +109,7 @@ public class DbCompany implements DbDao {
             return user;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
+            ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
             return null;
         }
     }
@@ -134,6 +128,7 @@ public class DbCompany implements DbDao {
             return true;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
+            ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
             return false;
         }
     }
@@ -151,6 +146,7 @@ public class DbCompany implements DbDao {
             return predictedExchanges = typedQuery.getResultList();
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
+            ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
             return null;
         }
     }
@@ -166,10 +162,7 @@ public class DbCompany implements DbDao {
             return true;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("Can't delete company " + ex.getMessage());
-            alert.showAndWait();
+            ExceptionAlert alert = new ExceptionAlert("Can't delete company", ex);
             return false;
         }
     }
@@ -185,10 +178,7 @@ public class DbCompany implements DbDao {
             return true;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("Can't update company " + ex.getMessage());
-            alert.showAndWait();
+            ExceptionAlert alert = new ExceptionAlert("Can't delete company", ex);
             return false;
         }
     }
@@ -199,24 +189,17 @@ public class DbCompany implements DbDao {
             if (!entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().begin();
             }
-
-
             Query query = entityManager.createNativeQuery("Select count(companyName) from company");
             int companyCountAtDatabase = Integer.valueOf(query.getSingleResult().toString());
             int companyCountAtSite = Parser.getCountOfSiteCompany();
 
             if (companyCountAtDatabase == companyCountAtSite) {
-                System.out.println(companyCountAtDatabase + " " + companyCountAtSite);
-                System.out.println("true");
                 return true;
             } else {
-                System.out.println(companyCountAtDatabase + " " + companyCountAtSite);
-                System.out.println("false");
                 return false;
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println("spam");
+            ExceptionAlert alert = new ExceptionAlert("Can't check companies count", ex);
             entityManager.getTransaction().rollback();
             return false;
         }
@@ -236,6 +219,7 @@ public class DbCompany implements DbDao {
             return company;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
+            ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
             return null;
         }
     }

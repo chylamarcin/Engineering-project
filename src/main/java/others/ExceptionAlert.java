@@ -18,7 +18,7 @@ public class ExceptionAlert {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Error!");
         alert.setContentText("Something went wrong, please try again.");
-        Label label = new Label("Network output:");
+        Label label = new Label("Exception stacktrace:");
         StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
         String exceptionAsString = sw.toString();
@@ -36,7 +36,32 @@ public class ExceptionAlert {
         expContent.add(label, 0, 0);
         expContent.add(textArea, 0, 1);
 
-// Set expandable Exception into the dialog pane.
+        alert.getDialogPane().setExpandableContent(expContent);
+        alert.showAndWait();
+    }
+
+    public ExceptionAlert(String s, Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Error!");
+        alert.setContentText(s);
+        Label label = new Label("Exception stacktrace:");
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        String exceptionAsString = sw.toString();
+        TextArea textArea = new TextArea(exceptionAsString);
+        textArea.setEditable(false);
+        textArea.setWrapText(false);
+
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(label, 0, 0);
+        expContent.add(textArea, 0, 1);
+
         alert.getDialogPane().setExpandableContent(expContent);
         alert.showAndWait();
     }

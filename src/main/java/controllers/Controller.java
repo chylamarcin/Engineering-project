@@ -26,7 +26,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+
 public class Controller implements Initializable {
+
+    @FXML
+    private Menu menuAbout;
+
+    @FXML
+    private MenuItem menuClose;
 
     @FXML
     private ComboBox<String> cbFilter;
@@ -133,14 +140,10 @@ public class Controller implements Initializable {
         }));
 
         btnGetValues.setOnAction((new EventHandler<ActionEvent>() {
-
             public void handle(ActionEvent event) {
 
                 DateTime lastJDate = null;
                 DateTime currentJDate = null;
-
-                btnGetComapnies.setDisable(true);
-                btnGetValues.setDisable(true);
 
                 try {
                     List<Company> companToCheckDate = dbCompany.loadAllCompanies();
@@ -155,16 +158,21 @@ public class Controller implements Initializable {
                         alert.setContentText("Values are up to date!");
                         alert.showAndWait();
                     } else {
+                        btnGenerate.setDisable(true);
+                        btnPropagation.setDisable(true);
+                        btnGetComapnies.setDisable(true);
+                        btnGetValues.setDisable(true);
                         Parser.getValues();
+
                     }
                 } catch (Exception ArrayIndexOutOfBoundsException) {
                     ExceptionAlert alert = new ExceptionAlert(ArrayIndexOutOfBoundsException);
                     Parser.getValues();
                 }
 
+                btnGenerate.setDisable(false);
                 btnGetComapnies.setDisable(false);
                 btnGetValues.setDisable(false);
-
             }
         }));
 
@@ -185,14 +193,21 @@ public class Controller implements Initializable {
                     tableViewPredict.setItems(pe);
 
                 }
-
-
             }
         }));
 
         btnGetComapnies.setOnAction((new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
+
+                btnGenerate.setDisable(true);
+                btnPropagation.setDisable(true);
+                btnGetComapnies.setDisable(true);
+                btnGetValues.setDisable(true);
                 Parser.getCompanies();
+                btnGenerate.setDisable(false);
+                btnGetComapnies.setDisable(false);
+                btnGetValues.setDisable(false);
+
             }
         }));
 
@@ -224,7 +239,6 @@ public class Controller implements Initializable {
                         ExceptionAlert alert = new ExceptionAlert(e);
                     }
                 }
-
             }
         });
 
@@ -255,8 +269,24 @@ public class Controller implements Initializable {
                     } catch (Exception e) {
                         ExceptionAlert alert = new ExceptionAlert(e);
                     }
-
                 }
+            }
+        });
+
+        menuClose.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.exit(0);
+            }
+        });
+
+        menuAbout.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Information!");
+                alert.setContentText("Author - Marcin Chy\u0142a\nUniversity of Rzesz\u00F3w - Information Technology year IV");
+                alert.showAndWait();
             }
         });
 
