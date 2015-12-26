@@ -5,7 +5,6 @@ import daoImpl.DbCompany;
 import javafx.scene.control.Alert;
 import model.Company;
 import model.CompanyExchange;
-import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -44,7 +43,6 @@ public class Parser implements DbDao {
                 buf.append(line + "\n");
             }
             html = buf.toString();
-
         } catch (MalformedURLException mue) {
 
         } catch (IOException ioe) {
@@ -52,14 +50,18 @@ public class Parser implements DbDao {
             try {
                 if (is != null) is.close();
             } catch (IOException ioe) {
-                // nothing to see here
+
             }
         }
-
         Document doc = Jsoup.parse(html);
         return doc;
     }
 
+    /**
+     * Method to get count of company at site.
+     *
+     * @return Number of company at site.
+     */
     public static int getCountOfSiteCompany() {
         try {
             Document doc = getSiteDoc();
@@ -70,11 +72,13 @@ public class Parser implements DbDao {
         }
     }
 
+    /**
+     * Method to save companies from site to database.
+     */
     public static void getCompanies() {
         DbCompany dbCompany = new DbCompany();
         //Download page source
         Document doc = getSiteDoc();
-
         LinkedList<String> listOfCompanyNames = new LinkedList<String>();
         Elements tabElements = doc.getElementsByClass("colWalor");
 
@@ -95,6 +99,9 @@ public class Parser implements DbDao {
         checkCompanies();
     }
 
+    /**
+     * Method to check companies at site and database. If some companies is at database and gone from site is deleted from database.
+     */
     public static void checkCompanies() {
         DbCompany dbCompany = new DbCompany();
         Document doc = getSiteDoc();
@@ -108,11 +115,9 @@ public class Parser implements DbDao {
         }
 
         listOfSiteCompanyNames.remove(0);
-
         List<Company> listAlphaOfCompany = dbCompany.loadAlphabetCompanies();
         boolean bol = false;
         for (int i = 0; i < listOfSiteCompanyNames.size(); i++) {
-
             if (listAlphaOfCompany.get(i).getCompanyName().equals(listOfSiteCompanyNames.get(i))) {
 
             } else {
@@ -127,7 +132,9 @@ public class Parser implements DbDao {
         }
     }
 
-
+    /**
+     * Method to get values of company exchanges and save it to database.
+     */
     public static void getValues() {
 
         Document doc = getSiteDoc();
@@ -137,7 +144,6 @@ public class Parser implements DbDao {
         LinkedList<String> listOfCompanyValues = new LinkedList<String>();
         Elements tabElementsCurse = doc.getElementsByClass("colKurs");
         Date date = new Date();
-        DateTime currentJDate = new DateTime(new Date());
 
         for (int i = 0; i < tabElementsCurse.size(); i++) {
             String companyValue = tabElementsCurse.get(i).text();
@@ -161,6 +167,5 @@ public class Parser implements DbDao {
         alert.setContentText("Downloading complete.");
         alert.showAndWait();
     }
-
 
 }

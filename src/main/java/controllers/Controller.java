@@ -39,7 +39,7 @@ public class Controller implements Initializable {
     private ComboBox<String> cbFilter;
 
     @FXML
-    private ComboBox<String> cbCompanies;
+    public ComboBox<String> cbCompanies;
 
     @FXML
     public Button btnGenerate;
@@ -55,9 +55,6 @@ public class Controller implements Initializable {
 
     @FXML
     private Button btnPropagation;
-
-    @FXML
-    private Label testLabel;
 
     @FXML
     private TableColumn<CompanyExchange, String> colValue;
@@ -81,10 +78,8 @@ public class Controller implements Initializable {
     private TableColumn<PredictedExchange, String> colPredictDate;
 
     private DbCompany dbCompany = new DbCompany();
-
     private List<Company> listOfCompanies = dbCompany.loadAllCompanies();
     private List<Company> listOfFilteredCompanies;
-
     public Button getGenerateButton() {
         return btnGenerate;
     }
@@ -289,6 +284,5 @@ public class Controller implements Initializable {
                 alert.showAndWait();
             }
         });
-
     }
 }

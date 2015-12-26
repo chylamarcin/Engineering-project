@@ -32,13 +32,6 @@ public class Network {
     private Company randomCompany3;
     public double[] dividors = new double[4];
 
-//    public Network(Company selectedCompany, Company randomCompany1, Company randomCompany2, Company randomCompany3) {
-//        this.selectedCompany = selectedCompany;
-//        this.randomCompany1 = randomCompany1;
-//        this.randomCompany2 = randomCompany2;
-//        this.randomCompany3 = randomCompany3;
-//    }
-
     public Network() {
     }
 
@@ -68,7 +61,6 @@ public class Network {
         double[][] tableOfValues = new double[4][];
 
         String helpV2 = "";
-//        try {
         for (int i = 0; i < listOfExchange.size(); i++) {
             helpV2 = listOfExchange.get(i).getValue().replace(",", ".");
             if (helpV2.contains(" ")) {
@@ -117,11 +109,6 @@ public class Network {
                 tableOfValues[j][i] = listOfListOfValues.get(j).get(i) / dividors[j];
             }
         }
-
-//        } catch (Exception e) {
-//            System.err.print("There was problem please generate new network.");
-//        }
-
         return tableOfValues;
 
     }
@@ -141,17 +128,10 @@ public class Network {
      * @return double[] preparedTable
      */
     public double[] prepareTables1d(double[][] tbToPrp1d) throws Exception {
-//        try {
         double[] preparedTable = {tbToPrp1d[0][tbToPrp1d[0].length - 1], tbToPrp1d[1][tbToPrp1d[1].length - 1],
                 tbToPrp1d[2][tbToPrp1d[2].length - 1], tbToPrp1d[3][tbToPrp1d[3].length - 1]};
 
         return preparedTable;
-//        } catch (Exception e) {
-////            JOptionPane.showMessageDialog(null, "problem");
-////            e.printStackTrace();
-//            System.err.println("Problem z prepareTable1d ");
-//            return null;
-//        }
     }
 
     /**
@@ -161,7 +141,6 @@ public class Network {
      * @return double[][] tbToPrp
      */
     public double[][] prepare2dTable(double[][] tbToPrp) throws Exception {
-//        try {
         double preparedTable[][] = {{tbToPrp[0][tbToPrp[0].length - 5], tbToPrp[0][tbToPrp[0].length - 4],
                 tbToPrp[0][tbToPrp[0].length - 3], tbToPrp[0][tbToPrp[0].length - 2]},
                 {tbToPrp[1][tbToPrp[1].length - 5], tbToPrp[1][tbToPrp[1].length - 4],
@@ -174,14 +153,7 @@ public class Network {
         return preparedTable;
     }
 
-//        } catch (Exception e) {
-//            System.err.println("Problem z prepare2dTable ");
-//            return null;
-//        }
-
-
     public double[][] prepare2dTbToPrpg(double[][] tbToPrp) throws Exception {
-//        try {
         double preparedTable[][] = {{tbToPrp[0][tbToPrp[0].length - 4],
                 tbToPrp[0][tbToPrp[0].length - 3],
                 tbToPrp[0][tbToPrp[0].length - 2],
@@ -314,6 +286,13 @@ public class Network {
         return log;
     }
 
+    /**
+     * Method to load network from file and use it to generate predicted exchange and save it to database.
+     *
+     * @param input
+     * @param company
+     * @throws Exception
+     */
     public void loadAndCompute(MLData input, Company company) throws Exception {
         BasicNetwork network = (BasicNetwork) EncogDirectoryPersistence.loadObject(
                 new File(company.getCompanyName() + " network.eg"));
@@ -348,14 +327,19 @@ public class Network {
         } else {
             c.add(Calendar.DATE, 1);
         }
+
         dt = c.getTime();
-
         predictedExchange.setDate(dt);
-
         DbCompany dbCompany = new DbCompany();
         dbCompany.savePredictedCompanyExchange(predictedExchange);
     }
 
+    /**
+     * Method to round double to selected decimal positions.
+     * @param x
+     * @param position
+     * @return
+     */
     static double roundOff(double x, int position) {
         double a = x;
         double temp = Math.pow(10.0, position);

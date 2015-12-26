@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import others.Parser;
 
+import java.util.Locale;
+
 public class Main extends Application {
 
     /**
@@ -25,6 +27,8 @@ public class Main extends Application {
         primaryStage.setTitle("Backpropagation");
         primaryStage.setScene(new Scene(root));
         DbCompany dbCompany = new DbCompany();
+
+        Locale.setDefault(new Locale("pl", "PL"));
 
         if (Parser.getCountOfSiteCompany() == -1) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

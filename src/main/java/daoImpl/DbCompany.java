@@ -42,6 +42,12 @@ public class DbCompany implements DbDao {
 
     }
 
+    /**
+     * Method to save company exchange in database.
+     *
+     * @param companyExchange
+     * @return True if company exchange was added and false if not.
+     */
     public boolean saveCompanyExchange(CompanyExchange companyExchange) {
         try {
             if (!entityManager.getTransaction().isActive()) {
@@ -61,6 +67,11 @@ public class DbCompany implements DbDao {
 
     }
 
+    /**
+     * Method to save predicted company exchange in databse.
+     * @param predictedExchange
+     * @return True if predicted exchange was added and false if not.
+     */
     public boolean savePredictedCompanyExchange(PredictedExchange predictedExchange) {
         try {
             if (!entityManager.getTransaction().isActive()) {
@@ -80,21 +91,11 @@ public class DbCompany implements DbDao {
 
     }
 
-    public boolean updateCompany(Company company) {
-        try {
-            if (!entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().begin();
-            }
-            entityManager.merge(company);
-            entityManager.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            ExceptionAlert alert = new ExceptionAlert("Can't update exchange", e);
-            return false;
-        }
-    }
-
+    /**
+     * Method to find company in database by name.
+     * @param companyName
+     * @return Comapny if company with that name exist in databse or null if not.
+     */
     public Company findCompany(String companyName) {
         Company user = null;
         try {
@@ -109,11 +110,16 @@ public class DbCompany implements DbDao {
             return user;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
+            //ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
             return null;
         }
     }
 
+    /**
+     * Method to check if company exist in databse by name.
+     * @param companyName
+     * @return True if company with that name exist in database and false if not.
+     */
     public Boolean booleanFindCompany(String companyName) {
         Company user = null;
         try {
@@ -128,11 +134,16 @@ public class DbCompany implements DbDao {
             return true;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
+            //ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
             return false;
         }
     }
 
+    /**
+     * Method to find list of predicted exchange of company in database by company id.
+     * @param companyId
+     * @return List of predicted exchange if it is in databse and null if not.
+     */
     public List<PredictedExchange> findPredictedExchange(Long companyId) {
         List<PredictedExchange> predictedExchanges = null;
         try {
@@ -146,11 +157,16 @@ public class DbCompany implements DbDao {
             return predictedExchanges = typedQuery.getResultList();
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
+            //ExceptionAlert alert = new ExceptionAlert("Can't find company", ex);
             return null;
         }
     }
 
+    /**
+     * Method to delete associations between company and company exchanges by id.
+     * @param id
+     * @return True if delete was complete and false if not.
+     */
     public boolean deleteAssociationsById(Long id) {
         try {
             if (!entityManager.getTransaction().isActive()) {
@@ -162,11 +178,16 @@ public class DbCompany implements DbDao {
             return true;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            ExceptionAlert alert = new ExceptionAlert("Can't delete company", ex);
+            //ExceptionAlert alert = new ExceptionAlert("Can't delete company", ex);
             return false;
         }
     }
 
+    /**
+     * Method to delete company from database by id.
+     * @param id
+     * @return Return true if delete was complete and false if not.
+     */
     public boolean deteleteCompanyById(Long id) {
         try {
             if (!entityManager.getTransaction().isActive()) {
@@ -178,13 +199,16 @@ public class DbCompany implements DbDao {
             return true;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
-            ExceptionAlert alert = new ExceptionAlert("Can't delete company", ex);
+            //ExceptionAlert alert = new ExceptionAlert("Can't delete company", ex);
             return false;
         }
     }
 
+    /**
+     * Method to check if companies cout is the same at site and database.
+     * @return True if count of companies is the same in database and at site and false if not.
+     */
     public Boolean checkCompaniesCount() {
-
         try {
             if (!entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().begin();
@@ -205,6 +229,11 @@ public class DbCompany implements DbDao {
         }
     }
 
+    /**
+     * Method to find company in database by id.
+     * @param id
+     * @return Company if company with this id exist in database and false if not.
+     */
     public Company findCompanyById(long id) {
         Company company = null;
         try {
@@ -224,6 +253,10 @@ public class DbCompany implements DbDao {
         }
     }
 
+    /**
+     * Method to get list of all companies from database.
+     * @return List of companies from database.
+     */
     public List<Company> loadAllCompanies() {
         TypedQuery<Company> createQuery = entityManager.createQuery(
                 "select t from Company t", Company.class);
@@ -231,6 +264,10 @@ public class DbCompany implements DbDao {
         return resultCompanyList;
     }
 
+    /**
+     * Method to get list of all companies sorted by alphabet.
+     * @return List of companies sorted by alphabet.
+     */
     public List<Company> loadAlphabetCompanies() {
         TypedQuery<Company> createQuery = entityManager.createQuery(
                 "select t from Company t order by t.companyName", Company.class);
@@ -238,6 +275,11 @@ public class DbCompany implements DbDao {
         return resultCompanyList;
     }
 
+    /**
+     * Method to load all companies whos names start at some letter.
+     * @param letter
+     * @return List of company whos names start at letter.
+     */
     public List<Company> loadAllCompaniesOnLetter(String letter) {
         TypedQuery<Company> createQuery = entityManager.createQuery(
                 "select t from Company t where t.companyName like :x", Company.class);
@@ -245,6 +287,4 @@ public class DbCompany implements DbDao {
         List<Company> resultCompanyList = createQuery.getResultList();
         return resultCompanyList;
     }
-
-
 }

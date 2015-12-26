@@ -11,5 +11,4 @@ import javax.persistence.EntityManager;
 public interface DbDao {
     DbSingleton db = DbSingleton.getInstance();
     EntityManager entityManager = db.getEntityManager();
-
 }
