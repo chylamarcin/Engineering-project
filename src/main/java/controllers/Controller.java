@@ -95,7 +95,16 @@ public class Controller implements Initializable {
 
         cbCompanies.setDisable(true);
         btnPropagation.setDisable(true);
-        btnGetComapnies.setVisible(true);
+        btnGenerate.setDisable(true);
+        buttonLoad.setDisable(true);
+
+        cbFilter.setTooltip(new Tooltip("Filter from 0 - 9 and A - Z"));
+        cbCompanies.setTooltip(new Tooltip("List with companies started at symbol from previous list"));
+        btnGenerate.setTooltip(new Tooltip("Generates new neural network"));
+        btnPropagation.setTooltip(new Tooltip("Generate exchange value of selected company for next day"));
+        buttonLoad.setTooltip(new Tooltip("Load data of selected company to tables"));
+        btnGetComapnies.setTooltip(new Tooltip("Update companies data"));
+        btnGetValues.setTooltip(new Tooltip("Get actual values of company exchange from internet site"));
 
         for (char i = '0'; i <= '9'; i++) {
             cbFilter.getItems().add(String.valueOf(i));
@@ -131,6 +140,9 @@ public class Controller implements Initializable {
                         btnPropagation.setDisable(true);
                     }
                 }
+
+                btnGenerate.setDisable(false);
+                buttonLoad.setDisable(false);
             }
         }));
 
@@ -154,7 +166,6 @@ public class Controller implements Initializable {
                         alert.showAndWait();
                     } else {
                         btnGenerate.setDisable(true);
-                        btnPropagation.setDisable(true);
                         btnGetComapnies.setDisable(true);
                         btnGetValues.setDisable(true);
                         Parser.getValues();
@@ -164,6 +175,7 @@ public class Controller implements Initializable {
                     ExceptionAlert alert = new ExceptionAlert(ArrayIndexOutOfBoundsException);
                     Parser.getValues();
                 }
+
 
                 btnGenerate.setDisable(false);
                 btnGetComapnies.setDisable(false);
@@ -230,8 +242,10 @@ public class Controller implements Initializable {
                         double[][] preparedTable = network.prepare2dTable(dataSet);
                         double[][] preparedOutput = network.prepareIdealOutput(dataSet);
                         network.createAndTrainNetwork(preparedTable, preparedOutput, company.getCompanyName());
+                        btnPropagation.setDisable(false);
                     } catch (Exception e) {
                         ExceptionAlert alert = new ExceptionAlert(e);
+                        btnPropagation.setDisable(true);
                     }
                 }
             }
@@ -261,6 +275,11 @@ public class Controller implements Initializable {
                         double[][] prepared2 = network.prepare2dTbToPrpg(dataSet);
                         MLData prep1dTb = new BasicMLData(network.prepareTables1d(dataSet));
                         network.loadAndCompute(prep1dTb, company);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("Information!");
+                        alert.setContentText("Propagation done.");
+                        alert.showAndWait();
+                        buttonLoad.fire();
                     } catch (Exception e) {
                         ExceptionAlert alert = new ExceptionAlert(e);
                     }
