@@ -16,30 +16,25 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `predictedexchange`
+-- Table structure for table `hibernate_sequence`
 --
 
-DROP TABLE IF EXISTS `predictedexchange`;
+DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `predictedexchange` (
-  `id` bigint(20) NOT NULL,
-  `date` date DEFAULT NULL,
-  `predictedValue` varchar(255) COLLATE utf8_polish_ci DEFAULT NULL,
-  `companyId` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKsyksbibm9fp5eh4yenqey41rs` (`companyId`),
-  CONSTRAINT `FKsyksbibm9fp5eh4yenqey41rs` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `predictedexchange`
+-- Dumping data for table `hibernate_sequence`
 --
 
-LOCK TABLES `predictedexchange` WRITE;
-/*!40000 ALTER TABLE `predictedexchange` DISABLE KEYS */;
-/*!40000 ALTER TABLE `predictedexchange` ENABLE KEYS */;
+LOCK TABLES `hibernate_sequence` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` VALUES (26299),(26299),(26299);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +46,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-20 21:29:32
+-- Dump completed on 2016-02-12 19:52:07

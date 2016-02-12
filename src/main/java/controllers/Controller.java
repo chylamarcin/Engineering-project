@@ -272,7 +272,7 @@ public class Controller implements Initializable {
                     network.dividors = new double[4];
                     try {
                         double[][] dataSet = network.companyNormalize(company, company2, company3, company4);
-                        double[][] prepared2 = network.prepare2dTbToPrpg(dataSet);
+                        //double[][] prepared2 = network.prepare2dTbToPrpg(dataSet);
                         MLData prep1dTb = new BasicMLData(network.prepareTables1d(dataSet));
                         network.loadAndCompute(prep1dTb, company);
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
